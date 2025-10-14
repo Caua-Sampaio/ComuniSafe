@@ -137,6 +137,12 @@ main{
         align-items: center;
     }
 
+        main .sobre .title{
+            width: 100%;
+            font-size: 3rem;
+            text-align: center;
+        }
+
         main .sobre .content{
             max-width: 800px;
             margin: auto;

@@ -1,0 +1,24 @@
+/* Importando estilo principal do documento */
+
+@import url(style.css);
+
+
+/* Formatação do conteudo da Section das Publicação */
+
+
+main section .publicacao{
+    margin: 2rem;
+    background-color: brown;
+    border-radius: 1rem;
+}
+
+    main section .publicacao .img_post{
+        width: 100%;
+        max-height: 15rem;
+        border-radius: 1rem 1rem 0 0;
+    }
+
+    main section .publicacao .conteudo{
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
