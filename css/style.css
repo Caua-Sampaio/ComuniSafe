@@ -15,12 +15,13 @@
 /* Variáveis de cores */
 :root { 
     --bg-color: #F9FAFB;
-    --snd-bg-color: #E2E8F0;
+    --snd-bg-color: #F0F0F0;
 
     --main-color: #3B82F6;
     --snd-main-color: #06B6D4;
 
     --text-color: ##1E293B;
+    --elements: #E2E8F0;
 }
 
 /* ------------------------------------------------- Configurações Gerais ------------------------------------------------- */
