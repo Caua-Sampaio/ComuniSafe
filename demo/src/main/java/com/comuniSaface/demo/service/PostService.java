@@ -2,6 +2,7 @@ package com.comuniSaface.demo.service;
 
 import com.comuniSaface.demo.dto.PostDTO;
 import com.comuniSaface.demo.entities.PostEntity;
+import com.comuniSaface.demo.entities.UserEntity;
 import com.comuniSaface.demo.repositories.PostRepository;
 import com.comuniSaface.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PostService {
+    private final PostRepository postRepository;
 
-    @Autowired
-    private PostRepository postRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    public PostService(PostRepository postRepository, UserRepository userRepository){
+        this.postRepository = postRepository;
+        this.userRepository = userRepository;
+    }
 
     @Transactional
     public PostDTO insert(PostDTO dto){
@@ -34,10 +37,8 @@ public class PostService {
         entity.setDescricao(dto.getDescricao());
 
         if(dto.getUsuarioId() != null){
-            var usuario = userRepository.getReferenceById(dto.getUsuarioId());
-            entity.setUsuario(usuario);
-        }else{
-            entity.setUsuario(null);
+            UserEntity user = userRepository.getReferenceById(dto.getUsuarioId());
+            entity.setUsuario(user);
         }
     }
 }

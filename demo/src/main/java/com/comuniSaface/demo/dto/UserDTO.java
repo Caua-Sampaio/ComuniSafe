@@ -16,17 +16,16 @@ public class UserDTO {
     private String bairro;
     private String cidade;
 
-    private List<PostDTO> posts = new ArrayList<>();
+    private List<PostDTO> posts;
 
     public UserDTO(){}
 
-    public UserDTO(Long id, String nome, String senha, String bairro, String cidade, List<PostDTO> posts) {
+    public UserDTO(Long id, String nome, String senha, String bairro, String cidade) {
         this.id = id;
         this.nome = nome;
         this.senha = senha;
         this.bairro = bairro;
         this.cidade = cidade;
-        this.posts = posts;
     }
 
 

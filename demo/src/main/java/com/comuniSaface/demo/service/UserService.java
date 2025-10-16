@@ -13,12 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
+    private final UserRepository userRepository;
 
-
-    @Autowired
-    private PostRepository postRepository;
-    @Autowired
-    private UserRepository userRepository;
+    public UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
 
     @Transactional
@@ -34,20 +33,5 @@ public class UserService {
         entity.setSenha(dto.getSenha());
         entity.setCidade(dto.getCidade());
         entity.setBairro(dto.getBairro());
-
-        entity.getPosts().clear();
-        for (PostDTO postDTO : dto.getPosts()) {
-            PostEntity postEntity = new PostEntity();
-            postEntity.setAssunto(postDTO.getAssunto());
-            postEntity.setMidia(postDTO.getMidia());
-            postEntity.setBairro(postDTO.getBairro());
-            postEntity.setCidade(postDTO.getCidade());
-            postEntity.setMoment(postDTO.getMoment());
-            postEntity.setDescricao(postDTO.getDescricao());
-
-            postEntity.setUsuario(entity);
-
-            entity.getPosts().add(postEntity);
-        }
     }
 }
