@@ -1,36 +1,25 @@
-package com.comuniSaface.demo.entities;
+package com.comuniSaface.demo.dto;
 
-import com.comuniSaface.demo.dto.UserDTO;
-import jakarta.persistence.*;
-import lombok.*;
-
+import com.comuniSaface.demo.entities.PostEntity;
 import java.time.Instant;
 
 
 
-@Entity
-@Table(name = "post")
-public class PostEntity {
+public class PostDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String bairro;
     private String cidade;
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant moment;
     private String assunto;
-    @Column(columnDefinition = "TEXT")
     private String descricao;
     private String midia;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = true)
-    private UserEntity usuario;
+    private Long usuarioId;
 
-    public PostEntity(){}
+    public PostDTO(){}
 
-    public PostEntity(Long id, String bairro, String cidade, Instant moment, String assunto, String descricao, String midia, UserEntity usuario) {
+    public PostDTO(Long id, String bairro, String cidade, Instant moment, String assunto, String descricao, String midia, Long usuarioID) {
         this.id = id;
         this.bairro = bairro;
         this.cidade = cidade;
@@ -38,7 +27,18 @@ public class PostEntity {
         this.assunto = assunto;
         this.descricao = descricao;
         this.midia = midia;
-        this.usuario = usuario;
+        this.usuarioId = usuarioID;
+    }
+
+    public PostDTO(PostEntity entity) {
+        this.id = entity.getId();
+        this.bairro = entity.getBairro();
+        this.cidade = entity.getCidade();
+        this.moment = entity.getMoment();
+        this.assunto = entity.getAssunto();
+        this.descricao = entity.getDescricao();
+        this.midia = entity.getMidia();
+        this.usuarioId = (entity.getUsuario() != null) ? entity.getUsuario().getId() : null;
     }
 
     public Long getId() {
@@ -97,11 +97,11 @@ public class PostEntity {
         this.midia = midia;
     }
 
-    public UserEntity getUsuario() {
-        return usuario;
+    public Long getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setUsuario(UserEntity usuario) {
-        this.usuario = usuario;
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 }
