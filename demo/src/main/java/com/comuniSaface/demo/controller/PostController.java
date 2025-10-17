@@ -3,11 +3,10 @@ package com.comuniSaface.demo.controller;
 import com.comuniSaface.demo.dto.PostDTO;
 import com.comuniSaface.demo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -20,6 +19,11 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @GetMapping
+    public ResponseEntity<Page<PostDTO>> findAll(Pageable pageable){
+        Page<PostDTO> page = postService.findAll(pageable);
+        return ResponseEntity.ok(page);
+    }
 
     @PostMapping
     public ResponseEntity<PostDTO> insert(@RequestBody PostDTO dto){

@@ -1,13 +1,8 @@
 package com.comuniSaface.demo.service;
 
-import com.comuniSaface.demo.dto.PostDTO;
 import com.comuniSaface.demo.dto.UserDTO;
-import com.comuniSaface.demo.entities.PostEntity;
 import com.comuniSaface.demo.entities.UserEntity;
-import com.comuniSaface.demo.repositories.PostRepository;
 import com.comuniSaface.demo.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

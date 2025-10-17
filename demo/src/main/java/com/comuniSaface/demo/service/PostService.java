@@ -6,8 +6,12 @@ import com.comuniSaface.demo.entities.UserEntity;
 import com.comuniSaface.demo.repositories.PostRepository;
 import com.comuniSaface.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class PostService {
@@ -18,6 +22,13 @@ public class PostService {
     public PostService(PostRepository postRepository, UserRepository userRepository){
         this.postRepository = postRepository;
         this.userRepository = userRepository;
+    }
+
+
+    @Transactional(readOnly = true)
+    public Page<PostDTO> findAll(Pageable pageable){
+        Page<PostEntity> result = postRepository.findAll(pageable);
+        return result.map(PostDTO::new);
     }
 
     @Transactional
