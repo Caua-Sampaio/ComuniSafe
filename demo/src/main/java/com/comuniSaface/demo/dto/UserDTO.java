@@ -3,6 +3,9 @@ package com.comuniSaface.demo.dto;
 import com.comuniSaface.demo.entities.UserEntity;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class UserDTO {
@@ -12,6 +15,8 @@ public class UserDTO {
     private String senha;
     private String bairro;
     private String cidade;
+
+    private List<PostDTO> posts;
 
     public UserDTO(){}
 
@@ -29,6 +34,9 @@ public class UserDTO {
         this.nome = entity.getNome();
         this.bairro = entity.getBairro();
         this.cidade = entity.getCidade();
+        this.posts = entity.getPosts()
+                .stream().map(PostDTO::new)
+                .collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -69,5 +77,13 @@ public class UserDTO {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public List<PostDTO> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<PostDTO> posts) {
+        this.posts = posts;
     }
 }
