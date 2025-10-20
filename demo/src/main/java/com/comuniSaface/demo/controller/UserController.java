@@ -2,7 +2,10 @@ package com.comuniSaface.demo.controller;
 
 import com.comuniSaface.demo.dto.UserDTO;
 import com.comuniSaface.demo.service.UserService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -15,6 +18,18 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @GetMapping
+    public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable){
+        Page<UserDTO> dto = userService.findAll(pageable);
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<UserDTO> findById(@PathVariable Long id){
+        UserDTO dto = userService.findById(id);
+        return ResponseEntity.ok(dto);
+    }
 
 
     @PostMapping
