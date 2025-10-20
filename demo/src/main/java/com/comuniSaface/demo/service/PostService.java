@@ -5,6 +5,7 @@ import com.comuniSaface.demo.entities.PostEntity;
 import com.comuniSaface.demo.entities.UserEntity;
 import com.comuniSaface.demo.repositories.PostRepository;
 import com.comuniSaface.demo.repositories.UserRepository;
+import com.comuniSaface.demo.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,6 +39,25 @@ public class PostService {
         entity = postRepository.save(entity);
         return new PostDTO(entity);
     }
+
+    @Transactional
+    public void deleteById(Long postId, Long usuarioId){
+        PostEntity entity = postRepository.findById(postId)
+                .orElseThrow(() -> new ResourceNotFoundException("Post não encontrado"));
+
+        if(!entity.getUsuario().getId().equals(usuarioId)){
+            throw new IllegalArgumentException("Você não tem poermissão para deletar este post");
+        }
+        postRepository.delete(entity);
+    }
+
+    @Transactional
+    public void deleteByTitle(String assunto, Long usuarioId){
+        PostEntity entity = postRepository.findByAssuntoAndUsuarioId(assunto, usuarioId)
+                .orElseThrow(() -> new ResourceNotFoundException("Post não encontrado com o título: " + assunto));
+        postRepository.delete(entity);
+    }
+
 
     private void copyDtoToEntity(PostDTO dto, PostEntity entity){
         entity.setAssunto(dto.getAssunto());

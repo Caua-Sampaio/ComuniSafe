@@ -31,4 +31,16 @@ public class PostController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
+
+    @DeleteMapping("/{postId}/usuario/{usuarioId}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long postId, @PathVariable Long usuarioId){
+        postService.deleteById(postId, usuarioId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/titulo/{assunto}/usuario/{usuarioId}")
+    public ResponseEntity<Void> deleteByTitle(@PathVariable String assunto, @PathVariable Long usuarioId){
+        postService.deleteByTitle(assunto, usuarioId);
+        return ResponseEntity.noContent().build();
+    }
 }
