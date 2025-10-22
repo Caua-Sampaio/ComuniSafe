@@ -38,7 +38,7 @@ main section form textarea{
     resize: none;
 }
 
- form .input-box input{
+form .input-box input{
     width: 49%;
     margin: 0.7rem 0.35rem;
 }

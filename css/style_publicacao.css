@@ -8,7 +8,7 @@
 
 main section .publicacao{
     margin: 2rem;
-    background-color: brown;
+    background-color: var(--elements);
     border-radius: 1rem;
 }
 
