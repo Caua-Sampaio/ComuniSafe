@@ -1,0 +1,46 @@
+
+.main{
+    margin-top: 6rem; /* Espaço para o header fixo */
+    padding: 2rem;
+}
+
+    .main .sobre{
+        background-color: var(--snd-bg-color);
+        border-radius: 1rem;
+        min-height: 65vh;
+        max-width: 70vw;
+        margin: 1rem auto;
+        padding: 5rem;
+        justify-content: center;
+        align-items: center;
+          justify-content: center;
+  align-items: center;
+    }
+
+    .main .sobre .login{
+            justify-items: center;
+            padding: 2rem;
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .main .sobre .login h1{
+            width: 100%;
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        form{
+          padding: 1rem;
+          display: grid;
+          gap: 2rem;
+          margin: 3rem;
+        }
+
+        button{
+          margin: 1rem;
+        }
+
+        .linkBTN{
+          margin: 1rem;
+        }

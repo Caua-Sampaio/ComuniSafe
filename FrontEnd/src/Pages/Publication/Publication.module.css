@@ -1,15 +1,15 @@
 /* Importando estilo principal do documento */
 
-@import url(style.css);
+
 
 
 /* Formatação do conteudo da Section das Publicação */
 
-
 main section .publicacao{
     margin: 2rem;
-    background-color: brown;
+    background-color: var(--elements);
     border-radius: 1rem;
+    background-color: aqua;
 }
 
     main section .publicacao .img_post{
