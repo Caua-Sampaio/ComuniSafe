@@ -1,7 +1,6 @@
-@import url(style.css);
-@import url(style_nova_puclicacao.css);
-
-
+.main{
+    background-color: blueviolet;
+}
 .flex-row{
     display: flex;
     gap: 1rem;

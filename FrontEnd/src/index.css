@@ -73,58 +73,11 @@ a.active {
         transform: scale(1.05);
     }
 
-/*------------------------------------------------- Configurações Header ------------------------------------------------- */
-
-
-
-header{
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 6rem;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2rem 5%;
-    background-color: var(--snd-bg-color);
-    backdrop-filter: blur(10px);
-    transition: all 0.5s ease;
-}
-
-    header .logo{
-        color: var(--text-color);
-        font-weight: 600;
-        margin-left: 1.5rem;
-        transition: color 0.3s ease;
-    }
-
-    header .logo:hover{
-        color: var(--main-color);
-        cursor: pointer;
-    }
-
-        header .navbar .nav-links{
-            list-style: none; /* Remove os marcadores de lista */
-            margin: 0;
-            padding: 0;
-            display: flex; /* Para alinhar os links lado a lado */
-            gap: 1.5rem; /* Espaço entre os links */
-        }
-
-            header .navbar .nav-links a{
-                    font-size: 1rem;
-                    color: var(--text-color);
-                    font-weight: 500;
-                    transition: 0.3s ease;
-            }
-
-/*------------------------------------------------- Configurações Main ------------------------------------------------- */
 
 main{
     margin-top: 6rem; /* Espaço para o header fixo */
     padding: 2rem;
+    background-color: red;
 }
 
     main .sobre{
@@ -144,76 +97,5 @@ main{
             text-align: center;
         }
 
-        main .sobre .content{
-            max-width: 800px;
-            margin: auto;
-            padding: 1rem;
-            text-align: center;
-        }
 
-            main .sobre .content h1{
-                font-size: 3rem;
-                margin-bottom: 1.5rem;
-            }
-
-            main .sobre .content p{
-                font-size: 1.2rem;
-                line-height: 1.6;
-                color: var(--text-color);
-            }
-
-        main .sobre .botao{
-            width: 100%;
-            text-align: center;
-            margin-top: 4rem;
-        }
-
-            main .sobre .botao .btn{
-                margin: 1rem;
-            }
-
-/*------------------------------------------------- Configurações Footer ------------------------------------------------- */
-
-footer{
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    padding: 40px;
-    display: flex;
-    margin-top: 1rem;
-    justify-content: space-between;
-    background-color: var(--snd-bg-color);
-    backdrop-filter: blur(10px);
-    transition: all 0.5s ease;
-}
-
-    footer .links{
-        display: grid;
-        gap: 1rem;
-        align-items: center;
-        justify-content: center;
-        margin-left: 2rem;
-    }
-    
-        footer .links a{
-            font-size: 1rem;
-            color: var(--text-color);
-            font-weight: 500;
-            transition: 0.3s ease;
-    }
-
-    footer .copyright{
-        display: grid;
-        margin-right: 2rem;
-        align-items: center;
-        justify-content: center;
-    }
-
-        footer .copyright p{
-            margin: auto;
-        }
-            footer .copyright p:nth-child(1){
-                margin: auto;
-                color: var(--main-color);
-            }
+        
