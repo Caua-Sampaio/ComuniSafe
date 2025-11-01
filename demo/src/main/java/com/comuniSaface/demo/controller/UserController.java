@@ -1,8 +1,8 @@
 package com.comuniSaface.demo.controller;
 
 import com.comuniSaface.demo.dto.UserDTO;
+import com.comuniSaface.demo.dto.UserMinDTO;
 import com.comuniSaface.demo.service.UserService;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/user")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
@@ -32,7 +34,7 @@ public class UserController {
     }
 
 
-    @PostMapping
+    @PostMapping(value = "/cadastrar")
     public ResponseEntity<UserDTO> insert (@RequestBody UserDTO dto){
         dto = userService.insert(dto);
         //Link para o recurso criado
@@ -41,4 +43,9 @@ public class UserController {
         return ResponseEntity.created(uri).body(dto);
     }
 
+    @PostMapping(value = "/login")
+    public ResponseEntity<Map<String, Boolean>> login (@RequestBody UserMinDTO minDTO){
+        boolean success = userService.login(minDTO);
+        return ResponseEntity.ok(Map.of("success", success));
+    }
 }
