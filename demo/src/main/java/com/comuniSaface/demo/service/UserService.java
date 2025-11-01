@@ -1,18 +1,17 @@
 package com.comuniSaface.demo.service;
 
-import com.comuniSaface.demo.dto.PostDTO;
 import com.comuniSaface.demo.dto.UserDTO;
-import com.comuniSaface.demo.entities.PostEntity;
+import com.comuniSaface.demo.dto.UserMinDTO;
 import com.comuniSaface.demo.entities.UserEntity;
 import com.comuniSaface.demo.repositories.UserRepository;
+import com.comuniSaface.demo.service.exceptions.BadCredentialsException;
 import com.comuniSaface.demo.service.exceptions.ResourceNotFoundException;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.apache.catalina.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Service
@@ -36,6 +35,15 @@ public class UserService {
         return new UserDTO(entity);
     }
 
+    @Transactional(readOnly = true)
+    public boolean login (UserMinDTO minDTO){
+        UserMinDTO user = Optional.ofNullable(userRepository.searchByEmail(minDTO.email()))
+                .orElseThrow(() -> new ResourceNotFoundException("Email não encontrado"));
+        if(!user.senha().equals(minDTO.senha())){
+            throw new BadCredentialsException("Senha incorreta !");
+        }
+        return true;
+    }
 
     @Transactional
     public UserDTO insert(UserDTO dto){
@@ -47,6 +55,7 @@ public class UserService {
 
     private void copyDtoToEntity(UserDTO dto, UserEntity entity){
         entity.setNome(dto.getNome());
+        entity.setEmail(dto.getEmail());
         entity.setSenha(dto.getSenha());
         entity.setCidade(dto.getCidade());
         entity.setBairro(dto.getBairro());
