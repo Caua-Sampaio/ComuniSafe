@@ -10,7 +10,7 @@ function Login() {
 // const [count, setCount] = useState(0)
 
     return (
-        <body>
+        <div class="body">
 
             <Header/>
 
@@ -21,8 +21,8 @@ function Login() {
 
                         <form action="" >
                             
-                                <input type="text" className={style.entrada} placeholder="E-mail:" required />
-                                <input type="password" className={style.entrada} placeholder="Senha:" required  />
+                            <input type="text" placeholder="E-mail:" id="" required />
+                            <input type="password" placeholder="Senha:" required  />
                             
                         </form>
 
@@ -35,7 +35,7 @@ function Login() {
 
             <Footer/>
 
-        </body>
+        </div>
     )   
 }
 

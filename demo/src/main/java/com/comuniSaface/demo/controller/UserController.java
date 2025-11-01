@@ -1,3 +1,4 @@
+
 package com.comuniSaface.demo.controller;
 
 import com.comuniSaface.demo.dto.UserDTO;
@@ -14,6 +15,8 @@ import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/user")
+@CrossOrigin(origins = "http://localhost:3000") // Permite acesso do frontend React
+
 public class UserController {
 
     @Autowired
@@ -32,7 +35,7 @@ public class UserController {
     }
 
 
-    @PostMapping
+    @PostMapping("/enviar")
     public ResponseEntity<UserDTO> insert (@RequestBody UserDTO dto){
         dto = userService.insert(dto);
         //Link para o recurso criado

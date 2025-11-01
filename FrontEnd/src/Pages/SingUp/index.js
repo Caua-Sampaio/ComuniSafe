@@ -10,7 +10,7 @@ function SingUp() {
 // const [count, setCount] = useState(0)
 
     return (
-        <body>
+        <div class="body">
 
             <Header/>
 
@@ -62,7 +62,7 @@ function SingUp() {
 
             <Footer/>
 
-        </body>
+        </div>
     )   
 }
 

@@ -7,7 +7,7 @@ import './Publication.module.css'
 function Publication() {
 
 return (
-    <body>
+    <div class="body">
         
         <Header/>
 
@@ -46,7 +46,7 @@ return (
 
         <Footer/>
 
-    </body>
+    </div>
 )
 }
 

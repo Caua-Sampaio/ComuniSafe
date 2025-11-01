@@ -10,7 +10,7 @@ function Home() {
 // const [count, setCount] = useState(0)
 
 return (
-    <body>
+    <div class="body">
         
         <Header/>
 
@@ -37,7 +37,7 @@ return (
 
         <Footer/>
 
-    </body>
+    </div>
 )
 }
 
