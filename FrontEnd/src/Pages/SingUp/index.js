@@ -1,7 +1,7 @@
 import style from "./SingUp.module.css";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -13,17 +13,19 @@ function SignUp() {
     const [senha, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
+    const navigate = useNavigate();
+
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const response = await axios.post("https://nongregarious-alan-wintery.ngrok-free.dev/user/cadastrar", {
-                nome,
-                senha,
-                bairro,
-                cidade,
-                email,
-            });
+            const response = await axios.post(
+                "https://nongregarious-alan-wintery.ngrok-free.dev/user/cadastrar",
+                { nome, senha, bairro, cidade, email }
+            );
             setMessage(response.data);
+
+            // redireciona com mensagem de sucesso
+            navigate("/success", { state: { message: "Cadastro concluído com sucesso!" } });
         } catch (error) {
             if (error.response) {
                 setMessage(error.response.data);
@@ -38,12 +40,12 @@ function SignUp() {
             <Header />
 
             <main>
-                <section class="sobre">
-                    <h1 class="title">Sign Up</h1>
+                <section className="sobre">
+                    <h1 className="title">Sign Up</h1>
 
                     <div className={style.singUp}>
                         <form onSubmit={handleSubmit} className="flex-row">
-                            <div className="input-box">
+                            <div className={style.inputBox}>
                                 <input
                                     type="text"
                                     placeholder="Nome"
@@ -60,7 +62,7 @@ function SignUp() {
                                 />
                             </div>
 
-                            <div className="input-box">
+                            <div className={style.inputBox}>
                                 <input
                                     type="text"
                                     placeholder="Bairro"
@@ -82,18 +84,17 @@ function SignUp() {
                                 placeholder="Senha"
                                 value={senha}
                                 onChange={(e) => setPassword(e.target.value)}
+                                className={style.inputSingle}
                                 required
                             />
 
-                            <button type="submit" className="btn">
-                                Cadastrar
-                            </button>
+                            <button type="submit" className="btn">Cadastrar</button>
                         </form>
 
                         {message && <p className={style.message}>{message}</p>}
 
-                        <div className="centralizar">
-                            <Link to="/login">Login</Link>
+                        <div style={{ textAlign: "center" }}>
+                            <Link to="/login" className={style.linkBTN}>Login</Link>
                         </div>
                     </div>
                 </section>

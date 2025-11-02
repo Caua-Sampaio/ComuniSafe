@@ -12,16 +12,13 @@ function NewPublications() {
     const [descricao, setDescricao] = useState('')
     const [midia, setMidia] = useState(null)
     const [midiaURL, setMidiaURL] = useState('')
-    const [usuarioId, setUsuarioId] = useState('') // novo campo
+    const [usuarioId, setUsuarioId] = useState('')
     const [responseMsg, setResponseMsg] = useState('')
 
     const handleFileChange = (e) => {
         const file = e.target.files[0]
         setMidia(file)
         setMidiaURL(file ? URL.createObjectURL(file) : '')
-
-        const span = document.getElementById('nome-arquivo')
-        if (span) span.textContent = file?.name || 'Nenhum arquivo selecionado'
     }
 
     const handleSubmit = async (e) => {
@@ -37,10 +34,25 @@ function NewPublications() {
         if (midia) formData.append('midia', midia)
 
         try {
-            const response = await axios.post('https://nongregarious-alan-wintery.ngrok-free.dev/api/publications', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' },
-            })
-            setResponseMsg(response.data)
+            const response = await axios.post(
+                'https://nongregarious-alan-wintery.ngrok-free.dev/api/publications',
+                formData,
+                { headers: { 'Content-Type': 'multipart/form-data' } }
+            )
+
+            // verifica se é objeto ou string
+            const msg = typeof response.data === 'string' ? response.data : response.data.message
+            setResponseMsg(msg)
+
+            // limpa campos
+            setBairro('')
+            setCidade('')
+            setMoment('')
+            setAssunto('')
+            setDescricao('')
+            setUsuarioId('')
+            setMidia(null)
+            setMidiaURL('')
         } catch (error) {
             setResponseMsg('Erro ao enviar publicação')
             console.error(error)
@@ -48,15 +60,15 @@ function NewPublications() {
     }
 
     return (
-        <div class="body">
+        <div className="body">
             <Header />
 
             <main>
-                <section class="sobre">
-                    <h1 class="title">Nova Publicação</h1>
+                <section className="sobre">
+                    <h1 className="title">Nova Publicação</h1>
 
                     <form onSubmit={handleSubmit}>
-                        <div class="input_box">
+                        <div className="input_box">
                             <input
                                 type="text"
                                 name="Assunto"
@@ -76,7 +88,7 @@ function NewPublications() {
                             />
                         </div>
 
-                        <div class="input_box">
+                        <div className="input_box">
                             <input
                                 type="text"
                                 name="Cidade"
@@ -89,21 +101,9 @@ function NewPublications() {
                             <input
                                 type="date"
                                 name="Dia"
-                                id="data"
                                 required
                                 value={moment}
                                 onChange={(e) => setMoment(e.target.value)}
-                            />
-                        </div>
-
-                        <div class="input_box">
-                            <input
-                                type="text"
-                                name="UsuarioId"
-                                placeholder="ID do Usuário"
-                                required
-                                value={usuarioId}
-                                onChange={(e) => setUsuarioId(e.target.value)}
                             />
                         </div>
 
@@ -119,10 +119,26 @@ function NewPublications() {
                             onChange={(e) => setDescricao(e.target.value)}
                         ></textarea>
 
-                        <input type="submit" value="Enviar mensagem" class="btn" />
+                        <div className="input_box">
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                            />
+                            {midiaURL && (
+                                <img
+                                    src={midiaURL}
+                                    alt="Preview da mídia"
+                                    style={{ width: '150px', marginTop: '10px' }}
+                                />
+                            )}
+                        </div>
+
+                        <input type="submit" value="Criar novo post" className="btn" />
+                        
                     </form>
 
-                    {responseMsg && <p class="response">{responseMsg}</p>}
+                    {responseMsg && <p className="response">{responseMsg}</p>}
                 </section>
             </main>
 

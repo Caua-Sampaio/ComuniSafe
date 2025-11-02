@@ -1,8 +1,7 @@
 import style from "./Login.module.css";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
@@ -11,14 +10,18 @@ export default function Login() {
     const [senha, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
+    const navigate = useNavigate();
+
     async function handleEnter(e) {
         e.preventDefault();
         try {
-            const response = await axios.post("https://nongregarious-alan-wintery.ngrok-free.dev/user/login", {
-                email,
-                senha,
-            });
+            const response = await axios.post(
+                "https://nongregarious-alan-wintery.ngrok-free.dev/user/login",
+                { email, senha }
+            );
+
             setMessage(response.data);
+            navigate("/success", { state: { message: "Login concluído com sucesso!" } });
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 setMessage("Credenciais inválidas");
@@ -32,37 +35,44 @@ export default function Login() {
         <div className={style.body}>
             <Header />
 
-            <main className={style.main}>
+            <main>
                 <section className={style.sobre}>
-                    <div className={style.login}>
-                        <h1 className={style.tittle}>Login</h1>
+                    <h1 className={style.title}>Login</h1>
 
+                    <div className={style.login}>
                         <form onSubmit={handleEnter}>
-                            <input
-                                type="email"
-                                placeholder="E-mail:"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
+                            <div className={style.inputBox}>
+                                <input
+                                    type="email"
+                                    placeholder="E-mail"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
+
                             <input
                                 type="password"
-                                placeholder="Senha:"
+                                placeholder="Senha"
                                 value={senha}
                                 onChange={(e) => setPassword(e.target.value)}
+                                className={style.inputSingle}
                                 required
                             />
 
-                            <button type="submit" class="btn">
+                            <button type="submit" className="btn">
                                 Entrar
                             </button>
+                            
                         </form>
 
                         {message && <p className={style.message}>{message}</p>}
 
-                        <Link to="/sing-up" className={style.linkBTN}>
-                            Sing Up
-                        </Link>
+                        <div className={style.centralizar}>
+                            <Link to="/sing-up" className={style.linkBTN}>
+                                Sign Up
+                            </Link>
+                        </div>
                     </div>
                 </section>
             </main>
