@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Emergence from "./Pages/Emergence";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import SingUp from "./Pages/SingUp";
@@ -13,6 +14,7 @@ function AppRoutes(){
         
             <Routes>
                 <Route path="/" element={ <Home />}></Route>
+                <Route path="/emergencia" element={ <Emergence />}></Route>
                 <Route path="/publicacoes" element={ <Publication />}></Route>
                 <Route path="/nova-publicacao" element={ <NewPublications />}></Route>
                 <Route path="/login" element={ <Login />}></Route>

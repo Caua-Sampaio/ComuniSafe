@@ -11,6 +11,7 @@ position: fixed;
     z-index: 1000;
     display: flex;
     align-items: center;
+    
     justify-content: space-between;
     padding: 2rem 5%;
     background-color: var(--snd-bg-color);
@@ -32,15 +33,17 @@ position: fixed;
 
         .header .navbar .nav_links{
             list-style: none; /* Remove os marcadores de lista */
-            margin: 0;
+            margin: 0 ;
             padding: 0;
             display: flex; /* Para alinhar os links lado a lado */
             gap: 1.5rem; /* Espaço entre os links */
+            justify-content: center;
         }
 
-            .header .navbar .nav-links a{
+            .header .navbar .nav-links li{
                     font-size: 1rem;
                     color: var(--text-color);
                     font-weight: 500;
                     transition: 0.3s ease;
+
             }

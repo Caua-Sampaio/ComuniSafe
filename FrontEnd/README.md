@@ -68,3 +68,28 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+<div class="input_container">
+                            <input
+                                type="file"
+                                id="arquivo"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                                style={{ display: 'none' }}
+                            />
+                            <label htmlFor="arquivo" class="label_file">
+                                Escolher arquivo
+                            </label>
+                            <span id="nome-arquivo" class="nome_arquivo">
+                                Nenhum arquivo selecionado
+                            </span>
+                        </div>
+
+                        {midiaURL && (
+                            <div class="image_preview">
+                                <img src={midiaURL} alt="Preview" style={{ maxWidth: '200px', marginTop: '10px' }} />
+                            </div>
+                        )}

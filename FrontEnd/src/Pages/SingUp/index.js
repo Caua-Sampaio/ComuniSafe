@@ -1,69 +1,107 @@
-// import { useState } from 'react'
-// import reactLogo from '../../assets/react.svg'
-// import viteLogo from '../../../public/vite.svg'
 import style from "./SingUp.module.css";
-import Header from "../../Components/Header"
-import Footer from "../../Components/Footer"
+import Header from "../../Components/Header";
+import Footer from "../../Components/Footer";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
-function SingUp() {
-// const [count, setCount] = useState(0)
+function SignUp() {
+    const [nome, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [bairro, setBairro] = useState("");
+    const [cidade, setCidade] = useState("");
+    const [senha, setPassword] = useState("");
+    const [message, setMessage] = useState("");
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        try {
+            const response = await axios.post("https://nongregarious-alan-wintery.ngrok-free.dev/user/cadastrar", {
+                nome,
+                senha,
+                bairro,
+                cidade,
+                email,
+            });
+            setMessage(response.data);
+        } catch (error) {
+            if (error.response) {
+                setMessage(error.response.data);
+            } else {
+                setMessage("Erro no servidor");
+            }
+        }
+    }
 
     return (
-        <div class="body">
+        <div className={style.body}>
+            <Header />
 
-            <Header/>
+            <main>
+                <section class="sobre">
+                    <h1 class="title">Sign Up</h1>
 
-                <main className={style.main}>
-                    <section class="sobre">
+                    <div className={style.singUp}>
+                        <form onSubmit={handleSubmit} className="flex-row">
+                            <div className="input-box">
+                                <input
+                                    type="text"
+                                    placeholder="Nome"
+                                    value={nome}
+                                    onChange={(e) => setName(e.target.value)}
+                                    required
+                                />
+                                <input
+                                    type="email"
+                                    placeholder="E-mail"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
 
-                        <h1 class="title">Sing Up</h1>
-                        
-                        <div class="sing-up">
+                            <div className="input-box">
+                                <input
+                                    type="text"
+                                    placeholder="Bairro"
+                                    value={bairro}
+                                    onChange={(e) => setBairro(e.target.value)}
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Cidade"
+                                    value={cidade}
+                                    onChange={(e) => setCidade(e.target.value)}
+                                    required
+                                />
+                            </div>
 
+                            <input
+                                type="password"
+                                placeholder="Senha"
+                                value={senha}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
 
-                            <form action="" id="forms"  class="flex-row">
-                                
-                                <div class="input-box">
+                            <button type="submit" className="btn">
+                                Cadastrar
+                            </button>
+                        </form>
 
-                                    <input type="name" id="newName" class="entrada" placeholder="Nome:" required/>
-                                    <input type="email" class="entrada" placeholder="E-mail:" />
+                        {message && <p className={style.message}>{message}</p>}
 
-                                    
-                                    
-                                </div>
-
-                                <div class="input-box">
-                                    <input type="text" id="newBairro" class="entrada" placeholder="Barro:" required/>
-                                    <input type="text" id="newCidade" class="entrada" placeholder="Cidade" required/>
-                                    
-
-                                </div>
-                                
-                                <input type="password" id="newPassword" class="entrada" placeholder="Senha" required/>
-                                
-                            </form>
-
-                        </div>
-
-                        <div class="centralizar">
-
-                            <input type="submit" value="Cadastrar" class="btn"/>
-
-                        </div>
-
-                        <div class="centralizar">
+                        <div className="centralizar">
                             <Link to="/login">Login</Link>
                         </div>
+                    </div>
+                </section>
+            </main>
 
-                    </section>
-                </main>
-
-
-            <Footer/>
-
+            <Footer />
         </div>
-    )   
+    );
 }
 
-export default SingUp;
+export default SignUp;

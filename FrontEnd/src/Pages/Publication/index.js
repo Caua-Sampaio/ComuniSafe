@@ -1,53 +1,67 @@
-
 import Footer from '../../Components/Footer'
 import Header from '../../Components/Header'
-
-import './Publication.module.css'
+import style from './Publication.module.css'
 
 function Publication() {
+  const posts = [
+    {
+      date: "01/11/2025",
+      bairro: "Jardim São Paulo",
+      assunto: "Alagamento",
+      descricao: "Fortes chuvas causaram alagamentos...",
+      img: "/assets/teste.jpg"
+    },
+    {
+      date: "30/10/2025",
+      bairro: "Centro",
+      assunto: "Acidente",
+      descricao: "Ocorrência registrada na avenida principal...",
+      img: "/assets/teste.jpg"
+    },
+    {
+      date: "29/10/2025",
+      bairro: "Vila Maria",
+      assunto: "Falta de energia",
+      descricao: "Interrupção no fornecimento de energia...",
+      img: "/assets/teste.jpg"
+    },
+    {
+      date: "28/10/2025",
+      bairro: "Vila Industrial",
+      assunto: "Buracos na via",
+      descricao: "Diversos buracos foram identificados...",
+      img: "/assets/teste.jpg"
+    }
+  ]
 
-return (
-    <div class="body">
-        
-        <Header/>
+  return (
+    <div className={style.body}>
+      <Header/>
 
-        <main>
-        <section class="sobre">
+      <main>
+        <section className={style.sobre}>
+          <h1 className={style.title}>Bairros onde precisa de atenção</h1>
 
-            <h1 class="title">Bairros onde precisa de atenção</h1>
-
-            <div class="publicacao">
-                <img class="img_post" src="/assets/teste.jpg" alt=""/>
-
-                <div class="conteudo">
-
-                    <span class="date"> xx/xx </span>
-                    <h3>Bairro: <span  class="bairro"></span></h3>
-                    <h2>Assunto: <span class="assunto"></span></h2>
-                    <span class="descricao"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam labore corporis ratione necessitatibus. Qui quod maxime possimus officiis consequuntur omnis id eius fugit non atque debitis eaque, unde expedita ut.</span>
+          <div className={style.posts_container}>
+            {posts.map((post, index) => (
+              <div className={style.publicacao} key={index}>
+                <img className={style.img_post} src={post.img} alt={`Post do bairro ${post.bairro}`} />
+                <div className={style.conteudo}>
+                  <span className={style.date}>{post.date}</span>
+                  <h3>Bairro: <span className={style.bairro}>{post.bairro}</span></h3>
+                  <h2>Assunto: <span className={style.assunto}>{post.assunto}</span></h2>
+                  <span className={style.descricao}>{post.descricao}</span>
                 </div>
-            </div>
-            
-            <div class="publicacao">
-                <img class="img_post" src="/assets/teste.jpg" alt=""/>
-
-                <div class="conteudo">
-
-                    <span class="date"> xx/xx </span>
-                    <h3>Bairro: <span  class="bairro"></span></h3>
-                    <h2>Assunto: <span class="assunto"></span></h2>
-                    <span class="descricao"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam labore corporis ratione necessitatibus. Qui quod maxime possimus officiis consequuntur omnis id eius fugit non atque debitis eaque, unde expedita ut.</span>
-                </div>
-            </div>
-            
+              </div>
+            ))}
+          </div>
 
         </section>
-    </main>
+      </main>
 
-        <Footer/>
-
+      <Footer/>
     </div>
-)
+  )
 }
 
 export default Publication

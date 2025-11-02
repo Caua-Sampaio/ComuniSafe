@@ -16,6 +16,7 @@ function Header (){
             <nav className={style.navbar}>
 
                 <ul className={style.nav_links}>
+                    <li><Link to="/emergencia" class="btn">Emergência</Link></li>
                     <li><Link to="/">Sobre</Link></li>
                     <li><Link to="/publicacoes">Publicações</Link></li>
                     <li><Link to="/nova-publicacao">Nova Publicação</Link></li>
