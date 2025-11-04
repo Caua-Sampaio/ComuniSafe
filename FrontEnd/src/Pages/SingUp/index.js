@@ -90,6 +90,7 @@ function SignUp() {
 
                             <button type="submit" className="btn">Cadastrar</button>
                         </form>
+                        
 
                         {message && <p className={style.message}>{message}</p>}
 

@@ -25,6 +25,23 @@
 }
 
 /* ------------------------------------------------- Configurações Gerais ------------------------------------------------- */
+/* Para estilizar a barra de rolagem de todo o documento */
+html {
+  width: 100%; /* Largura da barra de rolagem */
+}
+html::-webkit-scrollbar {
+  width: 10px; /* Largura */
+}
+html::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Cor da trilha */
+}
+html::-webkit-scrollbar-thumb {
+  background: #888; /* Cor da alça */
+  border-radius: 5px; /* Bordas arredondadas */
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Cor da alça ao passar o mouse */
+}
 
 .body {
     font-family: 'Inter', sans-serif;
@@ -46,9 +63,9 @@ a{
 
 a:hover,
 a.active {
-        color: var(--elements);
         text-shadow: 0 0 10px var(--main-color);
         cursor: pointer;
+        transform: scale(1.05);
 }
 
 
@@ -65,6 +82,7 @@ a.active {
     font-weight: 500;
     cursor: pointer;
     transition: 0.3s ease;
+    font-family: 'Inter', sans-serif;
 }
 
     .btn:hover,
@@ -90,6 +108,7 @@ main{
         padding: 7rem 9% 2rem;
         justify-content: center;
         align-items: center;
+        font-family: 'Inter', sans-serif;
     }
 
         main .sobre .title{

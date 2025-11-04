@@ -12,6 +12,7 @@ public class UserDTO {
 
     private Long id;
     private String nome;
+    private String email;
     private String senha;
     private String bairro;
     private String cidade;
@@ -20,7 +21,7 @@ public class UserDTO {
 
     public UserDTO(){}
 
-    public UserDTO(Long id, String nome, String senha, String bairro, String cidade) {
+    public UserDTO(Long id, String nome, String email, String senha, String bairro, String cidade) {
         this.id = id;
         this.nome = nome;
         this.senha = senha;
@@ -32,6 +33,7 @@ public class UserDTO {
     public UserDTO(UserEntity entity){
         this.id = entity.getId();
         this.nome = entity.getNome();
+        this.email = entity.getEmail();
         this.bairro = entity.getBairro();
         this.cidade = entity.getCidade();
         this.posts = entity.getPosts()
@@ -53,6 +55,14 @@ public class UserDTO {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {
