@@ -25,11 +25,17 @@ public class PostController {
         return ResponseEntity.ok(page);
     }
 
-    @PostMapping
+    @PostMapping("/inserir")
     public ResponseEntity<PostDTO> insert(@RequestBody PostDTO dto){
         dto = postService.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PostDTO> update (@PathVariable Long id, @RequestBody PostDTO dto){
+        dto = postService.update(id, dto);
+        return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{postId}/usuario/{usuarioId}")

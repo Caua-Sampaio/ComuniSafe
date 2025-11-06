@@ -6,6 +6,7 @@ import com.comuniSaface.demo.entities.UserEntity;
 import com.comuniSaface.demo.repositories.PostRepository;
 import com.comuniSaface.demo.repositories.UserRepository;
 import com.comuniSaface.demo.service.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,6 +39,18 @@ public class PostService {
         copyDtoToEntity(dto, entity);
         entity = postRepository.save(entity);
         return new PostDTO(entity);
+    }
+
+    @Transactional()
+    public PostDTO update (Long id, PostDTO dto){
+        try{
+            PostEntity entity =  postRepository.getReferenceById(id);
+            copyDtoToEntity(dto, entity);
+            entity = postRepository.save(entity);
+            return new PostDTO(entity);
+        }catch(EntityNotFoundException e){
+            throw new ResourceNotFoundException("Recurso não encontrado !");
+        }
     }
 
     @Transactional

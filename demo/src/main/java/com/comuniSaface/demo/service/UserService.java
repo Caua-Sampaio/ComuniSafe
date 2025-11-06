@@ -48,9 +48,14 @@ public class UserService {
     @Transactional
     public UserDTO insert(UserDTO dto){
         UserEntity entity = new UserEntity();
-        copyDtoToEntity(dto, entity);
-        entity = userRepository.save(entity);
-        return new UserDTO(entity);
+        String validateUser = userRepository.existsByEmail(dto.getEmail());
+        if(validateUser != null){
+            throw new BadCredentialsException("Email já cadastrado");
+        }else{
+            copyDtoToEntity(dto, entity);
+            entity = userRepository.save(entity);
+            return new UserDTO(entity);
+        }
     }
 
     private void copyDtoToEntity(UserDTO dto, UserEntity entity){
