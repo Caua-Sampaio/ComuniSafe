@@ -24,6 +24,7 @@ public class UserDTO {
     public UserDTO(Long id, String nome, String email, String senha, String bairro, String cidade) {
         this.id = id;
         this.nome = nome;
+        this.email = email;
         this.senha = senha;
         this.bairro = bairro;
         this.cidade = cidade;
