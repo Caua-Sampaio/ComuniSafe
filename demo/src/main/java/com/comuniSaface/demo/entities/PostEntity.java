@@ -28,6 +28,12 @@ public class PostEntity {
     @JoinColumn(name = "usuario_id", nullable = true)
     private UserEntity usuario;
 
+    @Column(name = "deletado", nullable = false)
+    private boolean deletado = false;
+
+    @Column(name = "data_delecao")
+    private Instant dataDelecao;
+
     public PostEntity(){}
 
     public PostEntity(Long id, String bairro, String cidade, Instant moment, String assunto, String descricao, String midia, UserEntity usuario) {
@@ -104,4 +110,11 @@ public class PostEntity {
     public void setUsuario(UserEntity usuario) {
         this.usuario = usuario;
     }
+
+    public boolean isDeletado() { return deletado; }
+    public void setDeletado(boolean deletado) { this.deletado = deletado; }
+
+    public Instant getDataDelecao() { return dataDelecao; }
+    public void setDataDelecao(Instant dataDelecao) { this.dataDelecao = dataDelecao; }
+
 }
