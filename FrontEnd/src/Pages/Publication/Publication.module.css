@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap');
+
+
 .body {
   padding: 20px;
+  font-family: 'Inter', sans-serif;
 }
 
 .sobre {
@@ -131,4 +135,124 @@
 @keyframes zoomIn {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
+}
+
+/* Fundo escurecido (overlay) */
+.popup_overlay {
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* garante que fica acima de tudo */
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Caixa branca central do popup */
+.popup_box {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-in-out;
+}
+
+/* Texto dentro do popup */
+.popup_box p {
+  padding-top: 1rem;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.popup_login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+
+}
+
+.linkBTN {
+    display: inline-block;       /* permite padding e centralização via text-align do container */
+    color: #0077ff;
+    text-decoration: none;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    padding-top: 1rem;
+    background-color: #fff;
+}
+
+.linkBTN:hover {
+    text-decoration: underline;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Container dos botões */
+.popup_buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Botões */
+.popup_buttons button {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Botão “Sim” */
+.popup_buttons button:first-child {
+  background-color: #0077ff;
+  color: #fff;
+}
+
+.popup_buttons button:first-child:hover {
+  background-color: #005fd1;
+}
+
+/* Botão “Não” */
+.popup_buttons button:last-child {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.popup_buttons button:last-child:hover {
+  background-color: #cfcfcf;
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

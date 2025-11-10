@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+.body {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+}
+
+.container {
+  flex: 1;
+  padding: 6rem 5% 3rem;
+  color: var(--text-color);
+}
+
+.container h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--main-color);
+  text-align: center;
+}
+
+.posts_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.post_card {
+  background-color: var(--snd-bg-color);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.post_card:hover {
+  transform: scale(1.02);
+}
+
+.post_img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.post_info {
+  padding: 1rem;
+}
+
+.post_info h2 {
+  font-size: 1.2rem;
+  color: var(--main-color);
+  margin-bottom: 0.5rem;
+}
+
+.post_info p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+.descricao {
+  margin-top: 0.5rem;
+  color: #ddd;
+  font-size: 0.9rem;
+}

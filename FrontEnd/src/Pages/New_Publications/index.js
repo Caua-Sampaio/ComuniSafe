@@ -36,7 +36,7 @@ function NewPublications() {
 
         try {
             const response = await axios.post(
-                'https://nongregarious-alan-wintery.ngrok-free.dev/api/publications',
+                'https://nongregarious-alan-wintery.ngrok-free.dev/api/post/inserir',
                 formData,
                 { headers: { 'Content-Type': 'multipart/form-data' } }
             )
@@ -120,6 +120,7 @@ function NewPublications() {
                             onChange={(e) => setDescricao(e.target.value)}
                         ></textarea>
 
+{/*
                         <div className="input_box">
                             <input
                                 type="file"
@@ -134,6 +135,7 @@ function NewPublications() {
                                 />
                             )}
                         </div>
+                        */}
 
                         <input type="submit" value="Criar novo post" className="btn" />
                         

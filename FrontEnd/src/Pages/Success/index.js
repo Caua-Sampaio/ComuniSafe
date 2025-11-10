@@ -15,7 +15,7 @@ export default function Success() {
                 <section className={style.sobre}>
                     <h1 className={style.title}>{message}</h1>
                     <p>Você pode continuar navegando no sistema.</p>
-                    <Link to="/" className="btn">Voltar para Home</Link>
+                    <Link to="/" className={style.btn}>Voltar para Home</Link>
                 </section>
             </main>
 

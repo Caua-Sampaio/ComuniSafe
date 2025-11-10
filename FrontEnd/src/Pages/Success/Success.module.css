@@ -23,30 +23,35 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     text-align: center;
     animation: fadeIn 0.6s ease-in-out;
+    gap: 1rem;
 }
 
 .title {
     font-size: 2rem;
     color: #0077ff;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
 }
 
 .text {
     color: #555;
     font-size: 1.1rem;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
 }
 
 .btn {
     display: inline-block;
-    background-color: #0077ff;
-    color: #fff;
-    text-decoration: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: 0.3s;
-    margin-top: 3rem;
+    padding: 1rem 2.5rem;
+    background: var(--main-color);
+    border-radius: 4rem;
+    box-shadow: none;
+    font-size: 1rem;
+    color: var(--text-color);
+    letter-spacing: 0.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    margin-top: 2rem;
 }
 
 .btn:hover {
