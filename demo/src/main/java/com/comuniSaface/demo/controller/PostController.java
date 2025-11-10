@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.Map;
 import java.net.URI;
 
 @RestController
@@ -25,22 +26,28 @@ public class PostController {
         return ResponseEntity.ok(page);
     }
 
-    @PostMapping
+    @PostMapping("/inserir")
     public ResponseEntity<PostDTO> insert(@RequestBody PostDTO dto){
         dto = postService.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
 
-    @DeleteMapping("/{postId}/usuario/{usuarioId}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long postId, @PathVariable Long usuarioId){
-        postService.deleteById(postId, usuarioId);
-        return ResponseEntity.noContent().build();
+    @PutMapping("/{id}")
+    public ResponseEntity<PostDTO> update (@PathVariable Long id, @RequestBody PostDTO dto){
+        dto = postService.update(id, dto);
+        return ResponseEntity.ok(dto);
     }
 
-    @DeleteMapping("/titulo/{assunto}/usuario/{usuarioId}")
-    public ResponseEntity<Void> deleteByTitle(@PathVariable String assunto, @PathVariable Long usuarioId){
-        postService.deleteByTitle(assunto, usuarioId);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/{postId}/usuario/{usuarioId}")
+    public ResponseEntity<Map<String, Object>> deletarPost(
+            @PathVariable Long postId, @PathVariable Long usuarioId) {
+
+        postService.deletarPorId(postId, usuarioId);
+        return ResponseEntity.ok(Map.of(
+                "mensagem", "Publicação marcada como deletada com sucesso",
+                "postId", postId
+        ));
     }
+
 }
