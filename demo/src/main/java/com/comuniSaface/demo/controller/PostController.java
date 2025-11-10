@@ -42,7 +42,6 @@ public class PostController {
     @DeleteMapping("/{postId}/usuario/{usuarioId}")
     public ResponseEntity<Map<String, Object>> deletarPost(
             @PathVariable Long postId, @PathVariable Long usuarioId) {
-
         postService.deletarPorId(postId, usuarioId);
         return ResponseEntity.ok(Map.of(
                 "mensagem", "Publicação marcada como deletada com sucesso",

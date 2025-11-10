@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 
 @Service
-public class PostService {
+public class    PostService {
 
     private static final Logger logger = LoggerFactory.getLogger(PostService.class);
 
@@ -57,9 +57,9 @@ public class PostService {
     @Transactional
     public void deletarPorId(Long postId, Long usuarioId){
         PostEntity entity = postRepository.findByIdAndDeletadoFalse(postId)
-                .orElseThrow(() -> new ResourceNotFoundException("Publicação não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Publicação não encontrado"));
 
-        if (entity.getUsuario() == null || !entity.getUsuario().getId().equals(usuarioId)) {
+        if (!entity.getUsuario().getId().equals(usuarioId)) {
             throw new IllegalArgumentException("Você não tem permissão para deletar esta publicação");
         }
 
