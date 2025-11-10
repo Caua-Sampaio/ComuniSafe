@@ -17,9 +17,12 @@ public class PostDTO {
 
     private Long usuarioId;
 
+    private Boolean deletado;
+    private Instant dataDelecao;
+
     public PostDTO(){}
 
-    public PostDTO(Long id, String bairro, String cidade, Instant moment, String assunto, String descricao, String midia, Long usuarioID) {
+    public PostDTO(Long id, String bairro, String cidade, Instant moment, String assunto, String descricao, String midia, Long usuarioID, Boolean deletado, Instant dataDelecao) {
         this.id = id;
         this.bairro = bairro;
         this.cidade = cidade;
@@ -28,6 +31,8 @@ public class PostDTO {
         this.descricao = descricao;
         this.midia = midia;
         this.usuarioId = usuarioID;
+        this.deletado = deletado;
+        this.dataDelecao = dataDelecao;
     }
 
     public PostDTO(PostEntity entity) {
@@ -103,5 +108,21 @@ public class PostDTO {
 
     public void setUsuarioId(Long usuarioId) {
         this.usuarioId = usuarioId;
+    }
+
+    public Boolean getDeletado() {
+        return deletado;
+    }
+
+    public void setDeletado(Boolean deletado) {
+        this.deletado = deletado;
+    }
+
+    public Instant getDataDelecao() {
+        return dataDelecao;
+    }
+
+    public void setDataDelecao(Instant dataDelecao) {
+        this.dataDelecao = dataDelecao;
     }
 }

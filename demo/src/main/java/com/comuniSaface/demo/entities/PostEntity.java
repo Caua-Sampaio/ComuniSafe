@@ -19,6 +19,8 @@ public class PostEntity {
     private String cidade;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant moment;
+
+    @Column(name = "assunto")
     private String assunto;
     @Column(columnDefinition = "TEXT")
     private String descricao;
@@ -29,14 +31,14 @@ public class PostEntity {
     private UserEntity usuario;
 
     @Column(name = "deletado", nullable = false)
-    private boolean deletado = false;
+    private Boolean deletado = false;
 
-    @Column(name = "data_delecao")
+    @Column(name = "dataDelecao")
     private Instant dataDelecao;
 
     public PostEntity(){}
 
-    public PostEntity(Long id, String bairro, String cidade, Instant moment, String assunto, String descricao, String midia, UserEntity usuario) {
+    public PostEntity(Long id, String bairro, String cidade, Instant moment, String assunto, String descricao, String midia, UserEntity usuario, Boolean deletado) {
         this.id = id;
         this.bairro = bairro;
         this.cidade = cidade;
@@ -45,6 +47,7 @@ public class PostEntity {
         this.descricao = descricao;
         this.midia = midia;
         this.usuario = usuario;
+        this.deletado = isDeletado();
     }
 
     public Long getId() {
