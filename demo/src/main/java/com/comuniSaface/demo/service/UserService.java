@@ -6,7 +6,6 @@ import com.comuniSaface.demo.entities.UserEntity;
 import com.comuniSaface.demo.repositories.UserRepository;
 import com.comuniSaface.demo.service.exceptions.BadCredentialsException;
 import com.comuniSaface.demo.service.exceptions.ResourceNotFoundException;
-import org.apache.catalina.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,20 +21,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    @Transactional(readOnly = true)
-    public Page<UserDTO> findAll(Pageable pageable){
-        Page<UserEntity> result = userRepository.findAll(pageable);
-        return result.map(UserDTO::new);
-    }
-
-    @Transactional(readOnly = true)
-    public UserDTO findById(Long id){
-        Optional<UserEntity> result = userRepository.findById(id);
-        UserEntity entity = result.orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado " + id));
-        return new UserDTO(entity);
-    }
-
-    @Transactional(readOnly = true)
     public boolean login (UserMinDTO minDTO){
         UserMinDTO user = Optional.ofNullable(userRepository.searchByEmail(minDTO.email()))
                 .orElseThrow(() -> new ResourceNotFoundException("Email não encontrado"));
@@ -50,12 +35,33 @@ public class UserService {
         UserEntity entity = new UserEntity();
         String validateUser = userRepository.existsByEmail(dto.getEmail());
         if(validateUser != null){
-            throw new BadCredentialsException("Email já cadastrado");
-        }else{
-            copyDtoToEntity(dto, entity);
-            entity = userRepository.save(entity);
-            return new UserDTO(entity);
+            throw new IllegalArgumentException("Usuário já existe com este email");
         }
+        copyDtoToEntity(dto, entity);
+        entity = userRepository.save(entity);
+        return new UserDTO(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<UserDTO> findAll(Pageable pageable) {
+        Page<UserEntity> page = userRepository.findAll(pageable);
+        return page.map(UserDTO::new);
+    }
+
+    @Transactional(readOnly = true)
+    public UserDTO findById(Long id) {
+        UserEntity entity = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado com id: " + id));
+        return new UserDTO(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public UserDTO findByEmail(String email) {
+        UserEntity entity = userRepository.findByEmail(email);
+        if (entity == null) {
+            throw new ResourceNotFoundException("Usuário não encontrado para o email informado");
+        }
+        return new UserDTO(entity);
     }
 
     private void copyDtoToEntity(UserDTO dto, UserEntity entity){
