@@ -1,0 +1,115 @@
+.body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.sobre {
+    width: 100%;
+    max-width: 500px;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.inputBox {
+    display: flex;
+    gap: 20px;
+}
+
+/* Inputs dentro do input-box */
+.inputBox input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.inputBox input:focus {
+    outline: none;
+    border-color: #0077ff;
+    box-shadow: 0 0 5px rgba(0,119,255,0.2);
+}
+
+/* Input único fora do input-box (senha) */
+.inputSingle {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.inputSingle:focus {
+    outline: none;
+    border-color: #0077ff;
+    box-shadow: 0 0 5px rgba(0,119,255,0.2);
+}
+
+.btn {
+    padding: 12px;
+    background-color: #0077ff;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #005ecb;
+}
+
+.message {
+    text-align: center;
+    margin-top: 15px;
+    color: #ff4d4f;
+    font-weight: bold;
+}
+
+
+.centralizar {
+    display: flex;
+    justify-content: center; /* centraliza horizontalmente */
+}
+
+.linkBTN {
+    display: inline-block;       /* permite padding e centralização via text-align do container */
+    color: #0077ff;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 3rem;
+    text-align: center;
+}
+
+.linkBTN:hover {
+    text-decoration: underline;
+}

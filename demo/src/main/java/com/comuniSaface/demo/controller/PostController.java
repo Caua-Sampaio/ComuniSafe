@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.Map;
 import java.net.URI;
 
 @RestController
@@ -39,14 +40,13 @@ public class PostController {
     }
 
     @DeleteMapping("/{postId}/usuario/{usuarioId}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long postId, @PathVariable Long usuarioId){
-        postService.deleteById(postId, usuarioId);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Map<String, Object>> deletarPost(
+            @PathVariable Long postId, @PathVariable Long usuarioId) {
+        postService.deletarPorId(postId, usuarioId);
+        return ResponseEntity.ok(Map.of(
+                "mensagem", "Publicação marcada como deletada com sucesso",
+                "postId", postId
+        ));
     }
 
-    @DeleteMapping("/titulo/{assunto}/usuario/{usuarioId}")
-    public ResponseEntity<Void> deleteByTitle(@PathVariable String assunto, @PathVariable Long usuarioId){
-        postService.deleteByTitle(assunto, usuarioId);
-        return ResponseEntity.noContent().build();
-    }
 }

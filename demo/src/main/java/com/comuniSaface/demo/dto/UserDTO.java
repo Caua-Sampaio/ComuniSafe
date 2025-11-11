@@ -16,8 +16,7 @@ public class UserDTO {
     private String senha;
     private String bairro;
     private String cidade;
-
-    private List<PostDTO> posts;
+    private List<PostDTO> posts = new ArrayList<>();
 
     public UserDTO(){}
 
@@ -37,9 +36,12 @@ public class UserDTO {
         this.email = entity.getEmail();
         this.bairro = entity.getBairro();
         this.cidade = entity.getCidade();
-        this.posts = entity.getPosts()
-                .stream().map(PostDTO::new)
-                .collect(Collectors.toList());
+
+        if (entity.getPosts() != null){
+            this.posts = entity.getPosts().stream().map(PostDTO::new).collect(Collectors.toList());
+        } else {
+            this.posts = new ArrayList<>();
+        }
     }
 
     public Long getId() {
