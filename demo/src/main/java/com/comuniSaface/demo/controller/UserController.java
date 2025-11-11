@@ -13,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Map;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -24,6 +25,7 @@ public class UserController {
     @GetMapping
     public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable){
         Page<UserDTO> dto = userService.findAll(pageable);
+        dto.forEach(u -> u.setSenha(null));
         return ResponseEntity.ok(dto);
     }
 
@@ -33,19 +35,36 @@ public class UserController {
         return ResponseEntity.ok(dto);
     }
 
-
     @PostMapping(value = "/cadastrar")
     public ResponseEntity<UserDTO> insert (@RequestBody UserDTO dto){
         dto = userService.insert(dto);
-        //Link para o recurso criado
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-        //Voltar a response 201 - CREATED
         return ResponseEntity.created(uri).body(dto);
     }
 
     @PostMapping(value = "/login")
-    public ResponseEntity<Map<String, Boolean>> login (@RequestBody UserMinDTO minDTO){
+    public ResponseEntity<Map<String, Boolean>> login (@RequestBody UserMinDTO minDTO, HttpSession session){
         boolean success = userService.login(minDTO);
+        if (success) {
+            UserDTO userDTO = userService.findByEmail(minDTO.email());
+            session.setAttribute("user", userDTO);
+        }
+
         return ResponseEntity.ok(Map.of("success", success));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserDTO> me(HttpSession session){
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        if (user == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(user);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpSession session){
+        session.invalidate();
+        return ResponseEntity.noContent().build();
     }
 }
