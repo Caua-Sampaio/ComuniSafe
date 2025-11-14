@@ -83,6 +83,32 @@ public class    PostService {
             entity.setUsuario(user);
         }
     }
+
+    @Transactional(readOnly = true)
+    public Page<PostDTO> listarMinhasPublicacoes(Long userId, Pageable pageable) {
+        if (!userRepository.existsById(userId)) {
+            logger.warn("Usuario não encontrado ao listarMinhasPublicacoes: {}", userId);
+            throw new ResourceNotFoundException("Usuário não encontrado: " + userId);
+        }
+        Page<PostEntity> page = postRepository.findAllByUsuarioIdAndDeletadoFalse(userId, pageable);
+        return page.map(PostDTO::new);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<PostDTO> listarPublicacoesFeed(Pageable pageable) {
+        Page<PostEntity> page = postRepository.findAllByDeletadoFalse(pageable);
+        return page.map(PostDTO::new);
+    }
+
+    public Page<PostDTO> listarPublicacoesPorUsuario(Long usuarioId, Pageable pageable) {
+        if (!userRepository.existsById(usuarioId)) {
+            logger.warn("Usuario não encontrado ao listarPublicacoesPorUsuario: {}", usuarioId);
+            throw new ResourceNotFoundException("Usuário não encontrado: " + usuarioId);
+        }
+        Page<PostEntity> page = postRepository.findAllByUsuarioIdAndDeletadoFalse(usuarioId, pageable);
+        return page.map(PostDTO::new);
+    }
+
 }
 
 
