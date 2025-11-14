@@ -4,7 +4,7 @@ spring.datasource.username=postgres
 spring.datasource.password=Q6*jMFA
 spring.datasource.driver-class-name=org.postgresql.Driver
 
-# Cria√ß√£o e atualiza√ß√£o do schema
+# CriaÁ„o e atualizaÁ„o do schema
 spring.jpa.hibernate.ddl-auto=update
 
 # Dialeto SQL do PostgreSQL
@@ -14,8 +14,8 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 
-# permitir conex√µes externas (ngrok)
+# permitir conexıes externas (ngrok)
 server.address=0.0.0.0
 
-# porta padr√£o
+# porta padr„o
 server.port=8080

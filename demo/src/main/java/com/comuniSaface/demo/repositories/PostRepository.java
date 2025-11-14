@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -18,10 +17,11 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
 
     List<PostEntity> findByUsuarioId(Long usuarioId);
 
-
     Optional<PostEntity> findByIdAndDeletadoFalse(Long id);
-
 
     Page<PostEntity> findAllByDeletadoFalse(Pageable pageable);
 
+    Page<PostEntity> findAllByUsuarioIdAndDeletadoFalse(Long usuarioId, Pageable pageable);
+
+    Page<PostEntity> findByUsuarioId(Long usuarioId, Pageable pageable);
 }
