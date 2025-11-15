@@ -1,8 +1,6 @@
 package com.comuniSaface.demo.entities;
 
-import com.comuniSaface.demo.dto.UserDTO;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -22,7 +20,9 @@ public class PostEntity {
     private String assunto;
     @Column(columnDefinition = "TEXT")
     private String descricao;
-    private String midia;
+    @Lob
+    @Column(columnDefinition = "BYTEA")
+    private byte[] midia;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = true)
@@ -43,7 +43,7 @@ public class PostEntity {
         this.moment = moment;
         this.assunto = assunto;
         this.descricao = descricao;
-        this.midia = midia;
+        this.midia = midia.getBytes();
         this.usuario = usuario;
         this.deletado = isDeletado();
     }
@@ -96,12 +96,12 @@ public class PostEntity {
         this.descricao = descricao;
     }
 
-    public String getMidia() {
+    public byte[] getMidia() {
         return midia;
     }
 
     public void setMidia(String midia) {
-        this.midia = midia;
+        this.midia = midia.getBytes();
     }
 
     public UserEntity getUsuario() {

@@ -21,7 +21,6 @@ public class UserPostController {
     public UserPostController(UserPostService userPostService) {
         this.userPostService = userPostService;
     }
-
     @GetMapping("/me/posts")
     public ResponseEntity<Page<PostDTO>> myPosts(HttpSession session, Pageable pageable) {
         Object obj = session.getAttribute("user");
@@ -35,6 +34,4 @@ public class UserPostController {
         Page<PostDTO> page = userPostService.findPostsByUsuario(user.getId(), pageable);
         return ResponseEntity.ok(page);
     }
-
 }
-

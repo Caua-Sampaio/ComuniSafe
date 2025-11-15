@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Service
 public class UserPostService {
 
@@ -31,7 +33,7 @@ public class UserPostService {
         dto.setMoment(entity.getMoment());
         dto.setAssunto(entity.getAssunto());
         dto.setDescricao(entity.getDescricao());
-        dto.setMidia(entity.getMidia());
+        dto.setMidia(Arrays.toString(entity.getMidia()));
         if (entity.getUsuario() != null) {
             dto.setUsuarioId(entity.getUsuario().getId());
         }

@@ -1,7 +1,6 @@
 package com.comuniSaface.demo.dto;
 
 import com.comuniSaface.demo.entities.PostEntity;
-import org.springframework.cglib.core.Local;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -15,7 +14,7 @@ public class PostDTO {
     private LocalDate moment;
     private String assunto;
     private String descricao;
-    private String midia;
+    private byte[] midia;
     private Long usuarioId;
     private Boolean deletado;
     private Instant dataDelecao;
@@ -29,7 +28,7 @@ public class PostDTO {
         this.moment = moment;
         this.assunto = assunto;
         this.descricao = descricao;
-        this.midia = midia;
+        this.midia = midia.getBytes();
         this.usuarioId = usuarioID;
         this.deletado = deletado;
         this.dataDelecao = dataDelecao;
@@ -43,6 +42,7 @@ public class PostDTO {
         this.assunto = entity.getAssunto();
         this.descricao = entity.getDescricao();
         this.midia = entity.getMidia();
+        this.deletado = entity.isDeletado();
         this.usuarioId = (entity.getUsuario() != null) ? entity.getUsuario().getId() : null;
     }
 
@@ -94,12 +94,12 @@ public class PostDTO {
         this.descricao = descricao;
     }
 
-    public String getMidia() {
+    public byte[] getMidia() {
         return midia;
     }
 
     public void setMidia(String midia) {
-        this.midia = midia;
+        this.midia = midia.getBytes();
     }
 
     public Long getUsuarioId() {
@@ -110,13 +110,9 @@ public class PostDTO {
         this.usuarioId = usuarioId;
     }
 
-    public Boolean getDeletado() {
-        return deletado;
-    }
+    public Boolean getDeletado() {return deletado;}
 
-    public void setDeletado(Boolean deletado) {
-        this.deletado = deletado;
-    }
+    public void setDeletado(Boolean deletado) {this.deletado = deletado;}
 
     public Instant getDataDelecao() {
         return dataDelecao;
