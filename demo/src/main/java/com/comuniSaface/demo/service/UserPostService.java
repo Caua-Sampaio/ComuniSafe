@@ -33,7 +33,7 @@ public class UserPostService {
         dto.setMoment(entity.getMoment());
         dto.setAssunto(entity.getAssunto());
         dto.setDescricao(entity.getDescricao());
-        dto.setMidia(Arrays.toString(entity.getMidia()));
+        dto.setMidia(Arrays.toString(entity.getMidia()).getBytes());
         if (entity.getUsuario() != null) {
             dto.setUsuarioId(entity.getUsuario().getId());
         }

@@ -85,13 +85,14 @@ public class    PostService {
         entity.setCidade(dto.getCidade());
         entity.setMoment(dto.getMoment());
         entity.setDescricao(dto.getDescricao());
-        entity.setDeletado(Boolean.TRUE.equals(dto.getDeletado()));
+        entity.setDeletado(dto.getDeletado() != null && dto.getDeletado());
         if(dto.getUsuarioId() != null){
             UserEntity user = userRepository.getReferenceById(dto.getUsuarioId());
             entity.setUsuario(user);
         }
         if (midia != null && !midia.isEmpty()) {
-            entity.setMidia(dto.getMidia());
+            byte[] bytes = midia.getBytes();
+            entity.setMidia(bytes);
         }
     }
 }
