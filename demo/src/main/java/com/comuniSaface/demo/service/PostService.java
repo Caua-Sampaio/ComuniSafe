@@ -91,7 +91,8 @@ public class    PostService {
             entity.setUsuario(user);
         }
         if (midia != null && !midia.isEmpty()) {
-            entity.setMidia(dto.getMidia());
+            byte[] bytes = midia.getBytes();
+            entity.setMidia(bytes);
         }
     }
 }

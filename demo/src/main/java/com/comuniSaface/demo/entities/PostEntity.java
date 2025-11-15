@@ -36,14 +36,14 @@ public class PostEntity {
 
     public PostEntity(){}
 
-    public PostEntity(Long id, String bairro, String cidade, LocalDate moment, String assunto, String descricao, String midia, UserEntity usuario, Boolean deletado) {
+    public PostEntity(Long id, String bairro, String cidade, LocalDate moment, String assunto, String descricao, byte[] midia, UserEntity usuario, Boolean deletado) {
         this.id = id;
         this.bairro = bairro;
         this.cidade = cidade;
         this.moment = moment;
         this.assunto = assunto;
         this.descricao = descricao;
-        this.midia = midia.getBytes();
+        this.midia = midia;
         this.usuario = usuario;
         this.deletado = isDeletado();
     }
@@ -100,8 +100,8 @@ public class PostEntity {
         return midia;
     }
 
-    public void setMidia(String midia) {
-        this.midia = midia.getBytes();
+    public void setMidia(byte[] midia) {
+        this.midia = midia;
     }
 
     public UserEntity getUsuario() {
