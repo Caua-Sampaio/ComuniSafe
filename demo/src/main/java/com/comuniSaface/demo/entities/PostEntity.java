@@ -21,7 +21,7 @@ public class PostEntity {
     @Column(columnDefinition = "TEXT")
     private String descricao;
     @Lob
-    @Column(columnDefinition = "BYTEA")
+    @Column(name = "midia", columnDefinition = "BYTEA")
     private byte[] midia;
 
     @ManyToOne
@@ -100,7 +100,7 @@ public class PostEntity {
         return midia;
     }
 
-    public void setMidia(String midia) {
+    public void setMidia(byte[] midia) {
         this.midia = midia.getBytes();
     }
 
