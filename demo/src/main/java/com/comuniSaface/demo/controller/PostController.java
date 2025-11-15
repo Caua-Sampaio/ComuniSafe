@@ -14,7 +14,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/post")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class PostController {
 
 
