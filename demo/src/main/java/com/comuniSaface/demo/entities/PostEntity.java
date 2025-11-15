@@ -5,20 +5,18 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
-
-
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "post")
 public class PostEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String bairro;
     private String cidade;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant moment;
+    private LocalDate moment;
 
     @Column(name = "assunto")
     private String assunto;
@@ -38,7 +36,7 @@ public class PostEntity {
 
     public PostEntity(){}
 
-    public PostEntity(Long id, String bairro, String cidade, Instant moment, String assunto, String descricao, String midia, UserEntity usuario, Boolean deletado) {
+    public PostEntity(Long id, String bairro, String cidade, LocalDate moment, String assunto, String descricao, String midia, UserEntity usuario, Boolean deletado) {
         this.id = id;
         this.bairro = bairro;
         this.cidade = cidade;
@@ -74,11 +72,11 @@ public class PostEntity {
         this.cidade = cidade;
     }
 
-    public Instant getMoment() {
+    public LocalDate getMoment() {
         return moment;
     }
 
-    public void setMoment(Instant moment) {
+    public void setMoment(LocalDate moment) {
         this.moment = moment;
     }
 

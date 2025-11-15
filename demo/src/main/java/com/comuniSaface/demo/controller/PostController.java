@@ -14,6 +14,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/post")
+@CrossOrigin(origins = "*")
 public class PostController {
 
 

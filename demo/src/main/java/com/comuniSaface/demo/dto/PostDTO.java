@@ -1,8 +1,10 @@
 package com.comuniSaface.demo.dto;
 
 import com.comuniSaface.demo.entities.PostEntity;
-import java.time.Instant;
+import org.springframework.cglib.core.Local;
 
+import java.time.Instant;
+import java.time.LocalDate;
 
 
 public class PostDTO {
@@ -10,19 +12,17 @@ public class PostDTO {
     private Long id;
     private String bairro;
     private String cidade;
-    private Instant moment;
+    private LocalDate moment;
     private String assunto;
     private String descricao;
     private String midia;
-
     private Long usuarioId;
-
     private Boolean deletado;
     private Instant dataDelecao;
 
     public PostDTO(){}
 
-    public PostDTO(Long id, String bairro, String cidade, Instant moment, String assunto, String descricao, String midia, Long usuarioID, Boolean deletado, Instant dataDelecao) {
+    public PostDTO(Long id, String bairro, String cidade, LocalDate moment, String assunto, String descricao, String midia, Long usuarioID, Boolean deletado, Instant dataDelecao) {
         this.id = id;
         this.bairro = bairro;
         this.cidade = cidade;
@@ -70,11 +70,11 @@ public class PostDTO {
         this.cidade = cidade;
     }
 
-    public Instant getMoment() {
+    public LocalDate getMoment() {
         return moment;
     }
 
-    public void setMoment(Instant moment) {
+    public void setMoment(LocalDate moment) {
         this.moment = moment;
     }
 
