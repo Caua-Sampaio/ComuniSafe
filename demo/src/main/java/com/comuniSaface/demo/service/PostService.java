@@ -14,8 +14,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.Instant;
+import java.util.Arrays;
 
 @Service
 public class    PostService {
@@ -24,7 +27,6 @@ public class    PostService {
 
     @Autowired
     private PostRepository postRepository;
-
     @Autowired
     private UserRepository userRepository;
 
@@ -34,19 +36,25 @@ public class    PostService {
         return result.map(PostDTO::new);
     }
 
+    @Transactional(readOnly = true)
+    public Page<PostDTO> findByUser(Long usuarioId, Pageable pageable){
+        Page<PostEntity> result = postRepository.findByUser(usuarioId, pageable);
+        return result.map(PostDTO::new);
+    }
+
     @Transactional
-    public PostDTO insert(PostDTO dto){
+    public PostDTO insert(PostDTO dto, MultipartFile midiaFile) throws IOException {
         PostEntity entity = new PostEntity();
-        copyDtoToEntity(dto, entity);
+        copyDtoToEntity(dto, entity, midiaFile);
         entity = postRepository.save(entity);
         return new PostDTO(entity);
     }
 
     @Transactional
-    public PostDTO update(Long id, PostDTO dto){
+    public PostDTO update(Long id, PostDTO dto, MultipartFile midiaFile) throws IOException{
         try {
             PostEntity entity = postRepository.getReferenceById(id);
-            copyDtoToEntity(dto, entity);
+            copyDtoToEntity(dto, entity, midiaFile);
             entity = postRepository.save(entity);
             return new PostDTO(entity);
         } catch (EntityNotFoundException e) {
@@ -58,32 +66,29 @@ public class    PostService {
     public void deletarPorId(Long postId, Long usuarioId){
         PostEntity entity = postRepository.findByIdAndDeletadoFalse(postId)
                 .orElseThrow(() -> new ResourceNotFoundException("Publicação não encontrado"));
-
         if (!entity.getUsuario().getId().equals(usuarioId)) {
             throw new IllegalArgumentException("Você não tem permissão para deletar esta publicação");
         }
-
         entity.setDeletado(true);
         entity.setDataDelecao(Instant.now());
         postRepository.save(entity);
-
         logger.info("Publicação marcada como deletada. postId={}, usuarioId={}", postId, usuarioId);
     }
 
-    private void copyDtoToEntity(PostDTO dto, PostEntity entity){
+    private void copyDtoToEntity(PostDTO dto, PostEntity entity, MultipartFile midia) throws IOException {
         entity.setAssunto(dto.getAssunto());
-        entity.setMidia(dto.getMidia());
         entity.setBairro(dto.getBairro());
         entity.setCidade(dto.getCidade());
         entity.setMoment(dto.getMoment());
         entity.setDescricao(dto.getDescricao());
-
+        entity.setDeletado(dto.getDeletado() != null && dto.getDeletado());
         if(dto.getUsuarioId() != null){
             UserEntity user = userRepository.getReferenceById(dto.getUsuarioId());
             entity.setUsuario(user);
         }
+        if (midia != null && !midia.isEmpty()) {
+            byte[] bytes = midia.getBytes();
+            entity.setMidia(bytes);
+        }
     }
 }
-
-
-
