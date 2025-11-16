@@ -4,35 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e2156be-9ee7-4afc-b1e4-6f1ad0da82e5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/config/CorsConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/handlers/ControllerExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/handlers/ControllerExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/dto/PostDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/dto/PostDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/dto/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/entities/PostEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/entities/PostEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/entities/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/entities/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/repositories/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/StorageService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/UserPostService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/config/CorsConfig$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/config/CorsConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/controller/PostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/controller/PostController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/controller/handlers/ControllerExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/controller/handlers/ControllerExceptionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/dto/PostDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/dto/PostDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/dto/UserDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/dto/UserDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/entities/PostEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/entities/PostEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/entities/UserEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/entities/UserEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/service/PostService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/service/PostService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/service/StorageService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/service/UserPostService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/service/UserService.class" afterDir="false" />
-    </list>
+    <list default="true" id="1e2156be-9ee7-4afc-b1e4-6f1ad0da82e5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
