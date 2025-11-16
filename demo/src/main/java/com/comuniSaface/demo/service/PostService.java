@@ -27,10 +27,6 @@ public class    PostService {
 
     @Autowired
     private PostRepository postRepository;
-
-    @Autowired
-    private StorageService fileStorageService;
-
     @Autowired
     private UserRepository userRepository;
 

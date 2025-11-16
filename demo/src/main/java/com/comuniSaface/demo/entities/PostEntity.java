@@ -1,11 +1,12 @@
 package com.comuniSaface.demo.entities;
-
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.Instant;
 import java.time.LocalDate;
 
 @Entity
+@Data
 @Table(name = "post")
 public class PostEntity {
     @Id
@@ -20,19 +21,14 @@ public class PostEntity {
     private String descricao;
     @Column(name = "midia")
     private byte[] midia;
-
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = true)
     private UserEntity usuario;
-
     @Column(name = "deletado", nullable = false)
     private Boolean deletado = false;
-
     @Column(name = "dataDelecao")
     private Instant dataDelecao;
-
     public PostEntity(){}
-
     public PostEntity(Long id, String bairro, String cidade, LocalDate moment, String assunto, String descricao, byte[] midia, UserEntity usuario, Boolean deletado, Instant dataDelecao) {
         this.id = id;
         this.bairro = bairro;
@@ -45,55 +41,84 @@ public class PostEntity {
         this.deletado = deletado != null ? deletado : Boolean.FALSE;
         this.dataDelecao = dataDelecao;
     }
+
     public Long getId() {
         return id;
     }
-    public void setId(Long id) {
-        this.id = id;
-    }
+
     public String getBairro() {
         return bairro;
     }
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
+
     public String getCidade() {
         return cidade;
     }
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
+
     public LocalDate getMoment() {
         return moment;
     }
-    public void setMoment(LocalDate moment) {
-        this.moment = moment;
-    }
+
     public String getAssunto() {
         return assunto;
     }
-    public void setAssunto(String assunto) {
-        this.assunto = assunto;
-    }
+
     public String getDescricao() {
         return descricao;
     }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+
     public byte[] getMidia() {
         return midia;
     }
-    public void setMidia(byte[] midia) { this.midia = midia;}
 
     public UserEntity getUsuario() {
         return usuario;
     }
+
+    public Boolean getDeletado() {
+        return deletado;
+    }
+
+    public Instant getDataDelecao() {
+        return dataDelecao;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public void setMoment(LocalDate moment) {
+        this.moment = moment;
+    }
+
+    public void setAssunto(String assunto) {
+        this.assunto = assunto;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setMidia(byte[] midia) {
+        this.midia = midia;
+    }
+
     public void setUsuario(UserEntity usuario) {
         this.usuario = usuario;
     }
-    public boolean isDeletado() { return deletado; }
-    public void setDeletado(boolean deletado) { this.deletado = deletado; }
-    public Instant getDataDelecao() { return dataDelecao; }
-    public void setDataDelecao(Instant dataDelecao) { this.dataDelecao = dataDelecao; }
+
+    public void setDeletado(Boolean deletado) {
+        this.deletado = deletado;
+    }
+
+    public void setDataDelecao(Instant dataDelecao) {
+        this.dataDelecao = dataDelecao;
+    }
 }

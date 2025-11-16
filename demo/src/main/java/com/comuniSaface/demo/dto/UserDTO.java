@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 
 public class UserDTO {
-
     private Long id;
     private String nome;
     private String email;
@@ -47,56 +46,28 @@ public class UserDTO {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
     public String getEmail() {
         return email;
     }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getSenha() {
         return senha;
     }
-
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
     public String getBairro() {
         return bairro;
     }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
     public String getCidade() {
         return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public List<PostDTO> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<PostDTO> posts) {
-        this.posts = posts;
     }
 }

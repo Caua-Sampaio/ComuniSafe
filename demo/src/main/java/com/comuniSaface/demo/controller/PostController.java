@@ -2,7 +2,6 @@ package com.comuniSaface.demo.controller;
 
 import com.comuniSaface.demo.dto.PostDTO;
 import com.comuniSaface.demo.service.PostService;
-import com.comuniSaface.demo.service.StorageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,28 +22,21 @@ import java.net.URI;
 public class PostController {
     @Autowired
     private PostService postService;
-
-    @Autowired
-    private StorageService storageService;
-
     @Autowired
     private ObjectMapper objectMapper;
-
     @GetMapping("/allPosts")
     public ResponseEntity<Page<PostDTO>> findAll(Pageable pageable){
         Page<PostDTO> page = postService.findAll(pageable);
         return ResponseEntity.ok(page);
     }
-
     @PutMapping("/myPosts/{usuarioId}")
     public ResponseEntity<Page<PostDTO>> findByUser(@PathVariable Long usuarioId, Pageable pageable){
         Page<PostDTO> page = postService.findByUser(usuarioId, pageable);
         return ResponseEntity.ok(page);
     }
-
     @PostMapping(value = "/inserir", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<PostDTO> insert(
-            @RequestPart("post") String postJson,                                // receber como String para maior compatibilidade
+            @RequestPart("postArray") String postJson,                                // receber como String para maior compatibilidade
             @RequestPart(value = "midia", required = false) MultipartFile midia
     ) throws IOException {
         // desserializa o JSON para PostDTO
@@ -53,7 +45,6 @@ public class PostController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
-
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<PostDTO> update(
             @PathVariable Long id,
@@ -64,7 +55,6 @@ public class PostController {
         dto = postService.update(id, dto, midia);
         return ResponseEntity.ok(dto);
     }
-
     @DeleteMapping("/{postId}/usuario/{usuarioId}")
     public ResponseEntity<Map<String, Object>> deletarPost(
             @PathVariable Long postId, @PathVariable Long usuarioId) {

@@ -5,19 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e2156be-9ee7-4afc-b1e4-6f1ad0da82e5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/demo/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/UserPostController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/config/CorsConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/handlers/ControllerExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/handlers/ControllerExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/dto/PostDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/dto/PostDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/dto/UserDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/entities/PostEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/entities/PostEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/StorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/StorageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/UserPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/UserPostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/controller/UserPostController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/entities/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/entities/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/StorageService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/UserPostService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/config/CorsConfig$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/config/CorsConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/controller/PostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/controller/PostController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/controller/handlers/ControllerExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/controller/handlers/ControllerExceptionHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/dto/PostDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/dto/PostDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/dto/UserDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/dto/UserDTO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/entities/PostEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/entities/PostEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/entities/UserEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/entities/UserEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/service/PostService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/service/PostService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/service/StorageService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/service/UserPostService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/service/UserService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,8 +64,10 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging backEnd",
-    "ignore.virus.scanning.warn.message": "true"
+    "git-widget-placeholder": "backEnd",
+    "ignore.virus.scanning.warn.message": "true",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors",
+    "settings.editor.splitter.proportion": "0.21835443"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -61,6 +77,11 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.comuniSaface.demo.controller.handlers" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean install" />
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="ComuniSafeApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
