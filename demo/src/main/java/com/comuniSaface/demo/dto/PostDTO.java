@@ -46,6 +46,9 @@ public class PostDTO {
         this.midia = entity.getMidia(); // OK, para retorno
         this.usuarioId = entity.getUsuario() != null ? entity.getUsuario().getId() : null;
         this.deletado = entity.isDeletado();
+        this.usuarioId = (entity.getUsuario() != null) ? entity.getUsuario().getId() : null;
+        this.dataDelecao = entity.getDataDelecao();
+
     }
 
     public Long getId() {
@@ -99,7 +102,6 @@ public class PostDTO {
     public byte[] getMidia() {
         return midia;
     }
-
     public void setMidia(byte[] midia) {
         this.midia = midia;
     }

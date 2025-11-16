@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e2156be-9ee7-4afc-b1e4-6f1ad0da82e5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/demo/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/controller/UserPostController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/dto/PostDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/dto/PostDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/entities/PostEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/entities/PostEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/StorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/StorageService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/UserPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/comuniSaface/demo/service/UserPostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/controller/UserPostController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/dto/PostDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/dto/PostDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/entities/PostEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/comuniSaface/demo/entities/PostEntity.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,14 +46,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Merging backEnd&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Merging backEnd",
+    "ignore.virus.scanning.warn.message": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.comuniSaface.demo.entities" />

@@ -13,14 +13,11 @@ public class PostEntity {
     private Long id;
     private String bairro;
     private String cidade;
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private LocalDate moment;
-
     @Column(name = "assunto")
     private String assunto;
     @Column(columnDefinition = "TEXT")
     private String descricao;
-    @Lob
     @Column(name = "midia")
     private byte[] midia;
 
@@ -36,7 +33,7 @@ public class PostEntity {
 
     public PostEntity(){}
 
-    public PostEntity(Long id, String bairro, String cidade, LocalDate moment, String assunto, String descricao, byte[] midia, UserEntity usuario, Boolean deletado) {
+    public PostEntity(Long id, String bairro, String cidade, LocalDate moment, String assunto, String descricao, byte[] midia, UserEntity usuario, Boolean deletado, Instant dataDelecao) {
         this.id = id;
         this.bairro = bairro;
         this.cidade = cidade;
@@ -45,7 +42,8 @@ public class PostEntity {
         this.descricao = descricao;
         this.midia = midia;
         this.usuario = usuario;
-        this.deletado = isDeletado();
+        this.deletado = deletado != null ? deletado : Boolean.FALSE;
+        this.dataDelecao = dataDelecao;
     }
     public Long getId() {
         return id;
@@ -86,7 +84,8 @@ public class PostEntity {
     public byte[] getMidia() {
         return midia;
     }
-    public void setMidia(byte[] midia) {this.midia = midia;}
+    public void setMidia(byte[] midia) { this.midia = midia;}
+
     public UserEntity getUsuario() {
         return usuario;
     }
