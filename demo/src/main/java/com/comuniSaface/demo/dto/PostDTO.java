@@ -21,14 +21,14 @@ public class PostDTO {
 
     public PostDTO(){}
 
-    public PostDTO(Long id, String bairro, String cidade, LocalDate moment, String assunto, String descricao, String midia, Long usuarioID, Boolean deletado, Instant dataDelecao) {
+    public PostDTO(Long id, String bairro, String cidade, LocalDate moment, String assunto, String descricao, byte[] midia, Long usuarioID, Boolean deletado, Instant dataDelecao) {
         this.id = id;
         this.bairro = bairro;
         this.cidade = cidade;
         this.moment = moment;
         this.assunto = assunto;
         this.descricao = descricao;
-        this.midia = midia.getBytes();
+        this.midia = midia;
         this.usuarioId = usuarioID;
         this.deletado = deletado;
         this.dataDelecao = dataDelecao;
@@ -44,6 +44,7 @@ public class PostDTO {
         this.midia = entity.getMidia();
         this.deletado = entity.isDeletado();
         this.usuarioId = (entity.getUsuario() != null) ? entity.getUsuario().getId() : null;
+        this.dataDelecao = entity.getDataDelecao();
     }
 
     public Long getId() {
@@ -97,9 +98,8 @@ public class PostDTO {
     public byte[] getMidia() {
         return midia;
     }
-
-    public void setMidia(String midia) {
-        this.midia = midia.getBytes();
+    public void setMidia(byte[] midia) {
+        this.midia = midia;
     }
 
     public Long getUsuarioId() {

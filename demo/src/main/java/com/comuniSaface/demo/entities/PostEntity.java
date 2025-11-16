@@ -21,7 +21,7 @@ public class PostEntity {
     @Column(columnDefinition = "TEXT")
     private String descricao;
     @Lob
-    @Column(columnDefinition = "BYTEA")
+    @Column(name = "midia")
     private byte[] midia;
 
     @ManyToOne
@@ -36,7 +36,7 @@ public class PostEntity {
 
     public PostEntity(){}
 
-    public PostEntity(Long id, String bairro, String cidade, LocalDate moment, String assunto, String descricao, byte[] midia, UserEntity usuario, Boolean deletado) {
+    public PostEntity(Long id, String bairro, String cidade, LocalDate moment, String assunto, String descricao, byte[] midia, UserEntity usuario, Boolean deletado, Instant dataDelecao) {
         this.id = id;
         this.bairro = bairro;
         this.cidade = cidade;
@@ -45,13 +45,13 @@ public class PostEntity {
         this.descricao = descricao;
         this.midia = midia;
         this.usuario = usuario;
-        this.deletado = isDeletado();
+        this.deletado = deletado != null ? deletado : Boolean.FALSE;
+        this.dataDelecao = dataDelecao;
     }
 
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -59,7 +59,6 @@ public class PostEntity {
     public String getBairro() {
         return bairro;
     }
-
     public void setBairro(String bairro) {
         this.bairro = bairro;
     }
@@ -67,7 +66,6 @@ public class PostEntity {
     public String getCidade() {
         return cidade;
     }
-
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
@@ -75,7 +73,6 @@ public class PostEntity {
     public LocalDate getMoment() {
         return moment;
     }
-
     public void setMoment(LocalDate moment) {
         this.moment = moment;
     }
@@ -83,7 +80,6 @@ public class PostEntity {
     public String getAssunto() {
         return assunto;
     }
-
     public void setAssunto(String assunto) {
         this.assunto = assunto;
     }
@@ -91,7 +87,6 @@ public class PostEntity {
     public String getDescricao() {
         return descricao;
     }
-
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
@@ -99,15 +94,11 @@ public class PostEntity {
     public byte[] getMidia() {
         return midia;
     }
-
-    public void setMidia(byte[] midia) {
-        this.midia = midia;
-    }
+    public void setMidia(byte[] midia) { this.midia = midia;}
 
     public UserEntity getUsuario() {
         return usuario;
     }
-
     public void setUsuario(UserEntity usuario) {
         this.usuario = usuario;
     }
