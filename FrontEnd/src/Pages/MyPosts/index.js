@@ -6,25 +6,23 @@ import Footer from "../../Components/Footer";
 import { API_URL } from "../../Context/Config";
 
 function MyPosts() {
-  // guarda as publicações do usuário
   const [posts, setPosts] = useState([]);
-  // controle de carregamento da página
   const [loading, setLoading] = useState(true);
 
-  // estados do modal de edição
-  const [editingPost, setEditingPost] = useState(null); // qual post está sendo editado
+  // Modal de edição
+  const [editingPost, setEditingPost] = useState(null);
   const [editData, setEditData] = useState({
     assunto: "",
     bairro: "",
     cidade: "",
-    descricao: ""
+    descricao: "",
+    midia: null, // nova imagem
   });
 
-  // pega o usuário logado do localStorage
   const user = JSON.parse(localStorage.getItem("user"));
   const usuarioId = user?.id;
 
-  // busca as publicações do usuário ao abrir a página
+  // Busca posts do usuário
   useEffect(() => {
     const fetchUserPosts = async () => {
       if (!usuarioId) {
@@ -33,14 +31,11 @@ function MyPosts() {
       }
 
       try {
-        // requisição para buscar posts do usuário
         const response = await axios.put(`${API_URL}/post/myPosts/${usuarioId}`);
-        // salva os posts retornados
         setPosts(response.data.content || []);
       } catch (error) {
         console.error("Erro ao buscar publicações do usuário:", error);
       } finally {
-        // encerra estado de carregamento
         setLoading(false);
       }
     };
@@ -48,33 +43,56 @@ function MyPosts() {
     fetchUserPosts();
   }, [usuarioId]);
 
-  // abre o modal preenchendo com os dados do post
+  // Abrir modal de edição
   const openEditModal = (post) => {
     setEditingPost(post);
     setEditData({
       assunto: post.assunto,
       bairro: post.bairro,
       cidade: post.cidade,
-      descricao: post.descricao
+      descricao: post.descricao,
+      midia: null, // permite trocar a imagem
     });
   };
 
-  // enviar atualização ao backend
+  // Seleciona imagem nova
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) setEditData({ ...editData, midia: file });
+  };
+
+  // Atualiza o post
   const handleUpdate = async () => {
     try {
-      const response = await axios.put(
-        `${API_URL}/post/update/${editingPost.id}`,
-        editData
-      );
+      const formData = new FormData();
+      formData.append("assunto", editData.assunto);
+      formData.append("bairro", editData.bairro);
+      formData.append("cidade", editData.cidade);
+      formData.append("descricao", editData.descricao);
 
-      // atualiza o estado local para refletir a edição sem recarregar a página
+      if (editData.midia) {
+        formData.append("midia", editData.midia);
+      }
+
+      await axios.put(`${API_URL}/post/update/${editingPost.id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      // atualiza localmente
       setPosts((prev) =>
         prev.map((p) =>
-          p.id === editingPost.id ? { ...p, ...editData } : p
+          p.id === editingPost.id
+            ? {
+                ...p,
+                ...editData,
+                midia: editData.midia
+                  ? URL.createObjectURL(editData.midia)
+                  : p.midia,
+              }
+            : p
         )
       );
 
-      // fecha o modal
       setEditingPost(null);
     } catch (err) {
       console.error("Erro ao atualizar post:", err);
@@ -82,7 +100,6 @@ function MyPosts() {
     }
   };
 
-  // se o usuário não estiver logado
   if (!user) {
     return (
       <div className={style.body}>
@@ -101,20 +118,17 @@ function MyPosts() {
       <main className={style.container}>
         <h1 className={style.titulo}>Minhas Publicações</h1>
 
-        {/* mensagens de carregamento ou lista de posts */}
         {loading ? (
           <p>Carregando suas publicações...</p>
         ) : posts.length === 0 ? (
           <p>Você ainda não criou nenhuma publicação.</p>
         ) : (
           <div className={style.posts_container}>
-            {/* percorre todos os posts do usuário */}
             {posts.map((post, index) => (
               <div key={post.id ?? index} className={style.post_card}>
-                {/* exibe a imagem se existir */}
                 {post.midia && (
                   <img
-                    src={`${API_URL}/uploads/${post.midia}`}
+                    src={`data:image/jpeg;base64,${post.midia}`}
                     alt={post.assunto}
                     className={style.post_img}
                   />
@@ -125,15 +139,11 @@ function MyPosts() {
                   <p><strong>Bairro:</strong> {post.bairro}</p>
                   <p><strong>Cidade:</strong> {post.cidade}</p>
                   <p><strong>Data:</strong> {new Date(post.moment).toLocaleDateString()}</p>
-
-                  {/* descrição cortada se for muito grande */}
                   <p className={style.descricao}>
                     {post.descricao?.length > 120
                       ? post.descricao.substring(0, 120) + "..."
                       : post.descricao}
                   </p>
-
-                  {/* botão que abre o modal */}
                   <button
                     className={style.edit_btn}
                     onClick={() => openEditModal(post)}
@@ -149,13 +159,12 @@ function MyPosts() {
 
       <Footer />
 
-      {/* modal de edição — aparece só quando editingPost tem algum valor */}
+      {/* Modal de edição */}
       {editingPost && (
         <div className={style.modal_overlay}>
           <div className={style.modal_box}>
             <h2>Editar Publicação</h2>
 
-            {/* campos com os valores do post */}
             <label>Assunto</label>
             <input
               type="text"
@@ -192,7 +201,37 @@ function MyPosts() {
               }
             />
 
-            {/* botões do modal */}
+            {/* Edição de imagem com pré-visualização */}
+            <label>Imagem (opcional)</label>
+            <div className={style.image_edit_container}>
+              {editData.midia ? (
+                <img
+                  src={URL.createObjectURL(editData.midia)}
+                  alt="Pré-visualização"
+                  className={style.preview_img}
+                />
+              ) : editingPost.midia ? (
+                <img
+                  src={`data:image/jpeg;base64,${editingPost.midia}`}
+                  alt="Imagem atual"
+                  className={style.preview_img}
+                />
+              ) : (
+                <div className={style.no_image}>Sem imagem</div>
+              )}
+
+              <label htmlFor="fileInput" className={style.upload_btn}>
+                Trocar Imagem
+              </label>
+              <input
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                onChange={handleFileChange}
+                style={{ display: "none" }}
+              />
+            </div>
+
             <div className={style.modal_actions}>
               <button onClick={() => setEditingPost(null)}>Cancelar</button>
               <button onClick={handleUpdate} className={style.salvar_btn}>

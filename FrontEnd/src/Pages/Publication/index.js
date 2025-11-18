@@ -9,30 +9,16 @@ import style from "./Publication.module.css";
 import { API_URL } from "../../Context/Config";
 
 function Publication() {
-  // Armazena lista de posts que chegam do backend
   const [posts, setPosts] = useState([]);
-
-  // Guarda qual post foi clicado para abrir o modal
   const [selectedPost, setSelectedPost] = useState(null);
-
-  // Controla popup de login obrigatório
   const [showPopup, setShowPopup] = useState(false);
-
-  // Mensagem de erro caso a requisição falhe
   const [errorMsg, setErrorMsg] = useState("");
-
-  // Controle do scroll infinito
-  const [page, setPage] = useState(0); // Página atual
-  const [loading, setLoading] = useState(false); // Evita requisições duplicadas
-  const [isLast, setIsLast] = useState(false); // Se chegou no final da lista
-
-  // Referência usada pelo IntersectionObserver no scroll infinito
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [isLast, setIsLast] = useState(false);
   const loaderRef = useRef(null);
-
-  // Usado para redirecionar o usuário
   const navigate = useNavigate();
 
-  // Função que formata a data para o padrão brasileiro
   const formatDate = (dateString) => {
     if (!dateString) return "";
     const date = new Date(dateString);
@@ -43,38 +29,41 @@ function Publication() {
     });
   };
 
-  // Busca posts no backend com base na página atual
   const loadPosts = async (pageNumber) => {
-    if (loading || isLast) return; // Evita re-fetch desnecessário
+    if (loading || isLast) return;
     setLoading(true);
     setErrorMsg("");
 
     try {
       const response = await axios.put(`${API_URL}/post/allPosts`, {
-        // Envia paginação para o backend
         params: { page: pageNumber, size: 2 },
         headers: { Accept: "application/json" },
       });
 
       const data = response.data;
 
-      // Se o backend mandar HTML ou algo inesperado
       if (!data || !Array.isArray(data.content)) {
         setErrorMsg("Backend retornou dados inválidos ou HTML.");
         setLoading(false);
         return;
       }
 
-      // Adiciona os novos posts na lista atual
-      setPosts((prev) => [...prev, ...data.content]);
+      setPosts((prev) => {
+        // Usando Map para garantir posts únicos
+        const postMap = new Map();
+        prev.forEach((p) => postMap.set(p.id, p));
+        data.content.forEach((p) => postMap.set(p.id, p));
 
-      // Marca se é a última página
+        return Array.from(postMap.values());
+      });
+
       setIsLast(data.last ?? false);
     } catch (err) {
       console.error("❌ ERRO AO BUSCAR POSTS:", err);
-
       if (err.message === "Network Error") {
-        setErrorMsg("Não foi possível conectar ao backend. Verifique a URL e se o servidor está ativo.");
+        setErrorMsg(
+          "Não foi possível conectar ao backend. Verifique a URL e se o servidor está ativo."
+        );
       } else {
         setErrorMsg("Erro ao buscar posts.");
       }
@@ -83,18 +72,14 @@ function Publication() {
     setLoading(false);
   };
 
-  // Chama a função toda vez que a página mudar
   useEffect(() => {
     loadPosts(page);
   }, [page]);
 
-  // Configura o IntersectionObserver para scroll infinito
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         const target = entries[0];
-
-        // Quando o loader aparece na tela, carrega próxima página
         if (target.isIntersecting && !loading && !isLast) {
           setPage((prev) => prev + 1);
         }
@@ -102,24 +87,15 @@ function Publication() {
       { threshold: 1 }
     );
 
-    // Ativa o observer
-    if (loaderRef.current) {
-      observer.observe(loaderRef.current);
-    }
-
-    // Limpa ao desmontar
+    if (loaderRef.current) observer.observe(loaderRef.current);
     return () => observer.disconnect();
   }, [loading, isLast]);
 
-  // Quando clica em um post
   const handlePostClick = (post) => {
     const token = localStorage.getItem("user");
-
-    // Se não estiver logado, exibe popup
     if (!token) {
       setShowPopup(true);
     } else {
-      // Senão, abre modal com os detalhes
       setSelectedPost(post);
     }
   };
@@ -132,22 +108,28 @@ function Publication() {
         <section className={style.sobre}>
           <h1 className={style.title}>Bairros onde precisa de atenção</h1>
 
-          {/* Exibe mensagem de erro, se existir */}
           {errorMsg && (
             <p style={{ textAlign: "center", marginTop: "1rem", color: "red" }}>
               {errorMsg}
             </p>
           )}
 
-          {/* Lista de posts */}
           <div className={style.posts_container}>
             {posts.length > 0 ? (
-              posts.map((post) => (
+              posts.map((post, index) => (
                 <div
                   className={style.publicacao}
-                  key={post.id}
+                  key={`${post.id}-${index}`} // Chave única garantida
                   onClick={() => handlePostClick(post)}
                 >
+                  {post.midia && (
+                    <img
+                      src={`data:image/jpeg;base64,${post.midia}`}
+                      alt={post.assunto}
+                      className={style.img_post}
+                    />
+                  )}
+
                   <div className={style.conteudo}>
                     <span className={style.date}>{formatDate(post.moment)}</span>
 
@@ -159,7 +141,6 @@ function Publication() {
                       Assunto: <span className={style.assunto}>{post.assunto}</span>
                     </h2>
 
-                    {/* Limita a descrição a 120 caracteres */}
                     <span className={style.descricao}>
                       {post.descricao?.length > 120
                         ? post.descricao.substring(0, 120) + "..."
@@ -175,22 +156,19 @@ function Publication() {
             )}
           </div>
 
-          {/* Loading do scroll infinito */}
           {loading && (
             <p style={{ textAlign: "center", marginTop: "1rem" }}>Carregando...</p>
           )}
 
-          {/* Aviso quando não tem mais conteúdo */}
           {isLast && (
             <p style={{ textAlign: "center", marginTop: "1rem" }}>
               Você chegou ao final! 🎉
             </p>
           )}
 
-          {/* Div usada apenas como âncora do scroll infinito */}
           <div ref={loaderRef} style={{ height: "20px" }} />
 
-          {/* Modal com detalhes do post */}
+          {/* Modal */}
           {selectedPost && (
             <div
               className={style.modal_overlay}
@@ -212,22 +190,27 @@ function Publication() {
                   <p><strong>Bairro:</strong> {selectedPost.bairro}</p>
                   <p><strong>Data:</strong> {formatDate(selectedPost.moment)}</p>
                   <p>{selectedPost.descricao}</p>
+
+                  {selectedPost.midia && (
+                    <img
+                      src={`data:image/jpeg;base64,${selectedPost.midia}`}
+                      alt={selectedPost.assunto}
+                      className={style.img_post}
+                    />
+                  )}
                 </div>
               </div>
             </div>
           )}
 
-          {/* Popup pedindo login */}
+          {/* Popup login */}
           {showPopup && (
             <div className={style.popup_overlay}>
               <div className={style.popup_box}>
                 <p>Você precisa estar logado para ver mais detalhes.</p>
 
                 <div className={style.popup_login}>
-                  <button
-                    className={style.linkBTN}
-                    onClick={() => navigate("/login")}
-                  >
+                  <button className={style.linkBTN} onClick={() => navigate("/login")}>
                     Login
                   </button>
                 </div>
