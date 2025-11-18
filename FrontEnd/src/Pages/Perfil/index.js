@@ -1,43 +1,25 @@
+// src/Pages/Perfil/Perfil.jsx
+
 import { useState, useEffect } from "react";
 import style from "./Perfil.module.css";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import axios from "axios";
+import { API_URL } from "../../Context/Config";
+import { useAuth } from "../../Context/AuthContext";
 
 function Perfil() {
-    const [user, setUser] = useState(null);
+    const { user, logout, login } = useAuth(); // 👉 agora usa o contexto
     const [editMode, setEditMode] = useState(false);
     const [formData, setFormData] = useState({});
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-
-    // busca o usuário logado no localStorage
-    const loggedUser = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
-        async function fetchUser() {
-            try {
-                if (!loggedUser || !loggedUser.id) {
-                    setError("Usuário não encontrado.");
-                    setLoading(false);
-                    return;
-                }
-
-                const response = await axios.get(
-                    `https://nongregarious-alan-wintery.ngrok-free.dev/user/${loggedUser.id}`
-                );
-
-                setUser(response.data);
-                setFormData(response.data);
-            } catch (err) {
-                setError("Erro ao carregar perfil.");
-            } finally {
-                setLoading(false);
-            }
+        if (user) {
+            setFormData(user);
         }
-
-        fetchUser();
-    }, []);
+        setLoading(false);
+    }, [user]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -46,14 +28,20 @@ function Perfil() {
     const handleSave = async () => {
         try {
             const response = await axios.put(
-                `https://nongregarious-alan-wintery.ngrok-free.dev/user/${user.id}`,
-                formData
+                `${API_URL}/user/${user.id}`,
+                formData,
+                {
+                    headers: { "Content-Type": "application/json" }
+                }
             );
 
-            setUser(response.data);
-            localStorage.setItem("user", JSON.stringify(response.data));
+            // 🔥 Agora atualiza o contexto, não só o localStorage
+            login(response.data);
+
             setEditMode(false);
+
         } catch (err) {
+            console.error("Erro ao atualizar usuário:", err);
             alert("Erro ao salvar alterações");
         }
     };
@@ -70,12 +58,12 @@ function Perfil() {
         );
     }
 
-    if (error) {
+    if (!user) {
         return (
             <div className={style.body}>
                 <Header />
                 <main className={style.container}>
-                    <p>{error}</p>
+                    <p>Nenhum usuário logado.</p>
                 </main>
                 <Footer />
             </div>
@@ -98,10 +86,10 @@ function Perfil() {
                     <div className={style.profile_info}>
                         {!editMode ? (
                             <>
-                                <h2>{user.nome}</h2>
-                                <p><strong>Email:</strong> {user.email}</p>
-                                <p><strong>Bairro:</strong> {user.bairro}</p>
-                                <p><strong>Cidade:</strong> {user.cidade}</p>
+                                <h2>{user?.nome || "Usuário"}</h2>
+                                <p><strong>Email:</strong> {user?.email || "—"}</p>
+                                <p><strong>Bairro:</strong> {user?.bairro || "—"}</p>
+                                <p><strong>Cidade:</strong> {user?.cidade || "—"}</p>
 
                                 <button
                                     className={style.edit_button}
@@ -115,28 +103,28 @@ function Perfil() {
                                 <input
                                     type="text"
                                     name="nome"
-                                    value={formData.nome}
+                                    value={formData.nome || ""}
                                     onChange={handleChange}
                                     className={style.input_field}
                                 />
                                 <input
                                     type="text"
                                     name="email"
-                                    value={formData.email}
+                                    value={formData.email || ""}
                                     onChange={handleChange}
                                     className={style.input_field}
                                 />
                                 <input
                                     type="text"
                                     name="bairro"
-                                    value={formData.bairro}
+                                    value={formData.bairro || ""}
                                     onChange={handleChange}
                                     className={style.input_field}
                                 />
                                 <input
                                     type="text"
                                     name="cidade"
-                                    value={formData.cidade}
+                                    value={formData.cidade || ""}
                                     onChange={handleChange}
                                     className={style.input_field}
                                 />

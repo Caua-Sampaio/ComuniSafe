@@ -1,21 +1,21 @@
 import style from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { isLoggedIn, logout } from "../../auth";
 import { useState, useEffect, useRef } from "react";
+import { useAuth } from "../../Context/AuthContext";
 
 function Header() {
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
+    // pega funções e dados do AuthContext
+    const { logout, isLoggedIn } = useAuth();
 
-    // função pra deslogar o usuário
     function handleLogout() {
         logout();
         navigate("/login");
     }
 
-    // Fecha o menu se clicar fora dele
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -34,13 +34,12 @@ function Header() {
 
             <nav className={style.navbar}>
                 <ul className={style.nav_links}>
-                    <li><Link to="/emergencia" className="btn">Emergência</Link></li>
+                    <li className="btn"><Link to="/emergencia">Emergência</Link></li>
                     <li><Link to="/">Sobre</Link></li>
                     <li><Link to="/publicacoes">Publicações</Link></li>
                     <li><Link to="/nova-publicacao">Nova Publicação</Link></li>
 
-                    {/* Se tiver token, mostra o botão com menu suspenso */}
-                    {isLoggedIn() ? (
+                    {isLoggedIn ? (
                         <li className={style.profile_menu} ref={menuRef}>
                             <button
                                 onClick={() => setMenuOpen(!menuOpen)}
@@ -58,7 +57,7 @@ function Header() {
                                         <Link to="/meus-posts" onClick={() => setMenuOpen(false)}>Minhas Publicações</Link>
                                     </li>
                                     <li>
-                                        <button onClick={handleLogout} >Sair</button>
+                                        <button onClick={handleLogout}>Sair</button>
                                     </li>
                                 </ul>
                             )}

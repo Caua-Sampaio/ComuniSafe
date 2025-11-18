@@ -1,98 +1,101 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-import Footer from '../../Components/Footer'
-import Header from '../../Components/Header'
-import style from './Publication.module.css'
+import Footer from "../../Components/Footer";
+import Header from "../../Components/Header";
+
+import style from "./Publication.module.css";
+import { API_URL } from "../../Context/Config";
 
 function Publication() {
-  // Guarda o post clicado (pra abrir o modal completo)
-  const [selectedPost, setSelectedPost] = useState(null)
-  // Controla se o pop-up de login vai aparecer
-  const [showPopup, setShowPopup] = useState(false)
-  // Hook do react-router pra redirecionar
-  const navigate = useNavigate()
+  const [posts, setPosts] = useState([]);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  // Lista de publicações (prévia fixa)
-  const posts = [
-    {
-      date: "01/11/2025",
-      bairro: "Jardim São Paulo",
-      assunto: "Alagamento",
-      descricao: "Fortes chuvas causaram alagamentos na região, com ruas bloqueadas e risco para pedestres. Evite transitar pelo local. Autoridades locais estão avaliando medidas para melhorar o escoamento da água e reforçar a segurança da população.",
-      img: "https://images.unsplash.com/photo-1523978591478-c753949ff840?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      date: "30/10/2025",
-      bairro: "Centro",
-      assunto: "Acidente",
-      descricao: "Um acidente envolvendo dois veículos causou lentidão na avenida principal. O trânsito está parcialmente interditado, e equipes da CET estão no local. Não há registro de feridos graves, mas recomenda-se evitar a área.",
-      img: "https://images.unsplash.com/photo-1523978591478-c753949ff840?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      date: "30/10/2025",
-      bairro: "Centro",
-      assunto: "Acidente",
-      descricao: "Um acidente envolvendo dois veículos causou lentidão na avenida principal. O trânsito está parcialmente interditado, e equipes da CET estão no local. Não há registro de feridos graves, mas recomenda-se evitar a área.",
-      img: "https://images.unsplash.com/photo-1523978591478-c753949ff840?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      date: "29/10/2025",
-      bairro: "Vila Maria",
-      assunto: "Falta de energia",
-      descricao: "A região enfrenta interrupção no fornecimento de energia devido a manutenção emergencial na rede elétrica. A companhia informou que o serviço deve ser restabelecido até às 18h.",
-      img: "https://images.unsplash.com/photo-1523978591478-c753949ff840?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      date: "28/10/2025",
-      bairro: "Vila Industrial",
-      assunto: "Buracos na via",
-      descricao: "Diversos buracos foram identificados na via principal, causando lentidão no trânsito e aumentando o risco de acidentes com motociclistas. A prefeitura já foi notificada e deve iniciar os reparos nos próximos dias.",
-      img: "https://images.unsplash.com/photo-1523978591478-c753949ff840?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      date: "01/11/2025",
-      bairro: "Jardim São Paulo",
-      assunto: "Alagamento",
-      descricao: "Fortes chuvas causaram alagamentos na região, com ruas bloqueadas e risco para pedestres. Evite transitar pelo local. Autoridades locais estão avaliando medidas para melhorar o escoamento da água e reforçar a segurança da população.",
-      img: "https://images.unsplash.com/photo-1523978591478-c753949ff840?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      date: "30/10/2025",
-      bairro: "Centro",
-      assunto: "Acidente",
-      descricao: "Um acidente envolvendo dois veículos causou lentidão na avenida principal. O trânsito está parcialmente interditado, e equipes da CET estão no local. Não há registro de feridos graves, mas recomenda-se evitar a área.",
-      img: "https://images.unsplash.com/photo-1523978591478-c753949ff840?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      date: "29/10/2025",
-      bairro: "Vila Maria",
-      assunto: "Falta de energia",
-      descricao: "A região enfrenta interrupção no fornecimento de energia devido a manutenção emergencial na rede elétrica. A companhia informou que o serviço deve ser restabelecido até às 18h.",
-      img: "https://images.unsplash.com/photo-1523978591478-c753949ff840?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      date: "28/10/2025",
-      bairro: "Vila Industrial",
-      assunto: "Buracos na via",
-      descricao: "Diversos buracos foram identificados na via principal, causando lentidão no trânsito e aumentando o risco de acidentes com motociclistas. A prefeitura já foi notificada e deve iniciar os reparos nos próximos dias.",
-      img: "https://images.unsplash.com/photo-1523978591478-c753949ff840?auto=format&fit=crop&w=800&q=80"
+  // Scroll infinito
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [isLast, setIsLast] = useState(false);
+
+  const loaderRef = useRef(null);
+  const navigate = useNavigate();
+
+  // Formata a data para dd/MM/yyyy
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
+
+  const loadPosts = async (pageNumber) => {
+    if (loading || isLast) return;
+    setLoading(true);
+    setErrorMsg("");
+
+    try {
+      const response = await axios.put(`${API_URL}/post/allPosts`, {
+        params: { page: pageNumber, size: 2 },
+        headers: { Accept: "application/json" },
+      });
+
+      const data = response.data;
+
+      if (!data || !Array.isArray(data.content)) {
+        setErrorMsg("Backend retornou dados inválidos ou HTML.");
+        setLoading(false);
+        return;
+      }
+
+      setPosts((prev) => [...prev, ...data.content]);
+      setIsLast(data.last ?? false);
+    } catch (err) {
+      console.error("❌ ERRO AO BUSCAR POSTS:", err);
+      if (err.message === "Network Error") {
+        setErrorMsg("Não foi possível conectar ao backend. Verifique a URL e se o servidor está ativo.");
+      } else {
+        setErrorMsg("Erro ao buscar posts.");
+      }
     }
-  ]
 
-  // Função chamada quando o usuário clica num post
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    loadPosts(page);
+  }, [page]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const target = entries[0];
+        if (target.isIntersecting && !loading && !isLast) {
+          setPage((prev) => prev + 1);
+        }
+      },
+      { threshold: 1 }
+    );
+
+    if (loaderRef.current) {
+      observer.observe(loaderRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [loading, isLast]);
+
   const handlePostClick = (post) => {
-    // Verifica se tem token salvo no localStorage
-    const token = localStorage.getItem("token")
-
-    // Se NÃO tiver token, mostra pop-up pedindo login/cadastro
+    const token = localStorage.getItem("user");
     if (!token) {
-      setShowPopup(true)
+      setShowPopup(true);
     } else {
-      // Se estiver logado, abre o modal com o post completo
-      setSelectedPost(post)
+      setSelectedPost(post);
     }
-  }
+  };
 
   return (
     <div className={style.body}>
@@ -102,31 +105,55 @@ function Publication() {
         <section className={style.sobre}>
           <h1 className={style.title}>Bairros onde precisa de atenção</h1>
 
-          {/* Container com todas as prévias */}
+          {errorMsg && (
+            <p style={{ textAlign: "center", marginTop: "1rem", color: "red" }}>
+              {errorMsg}
+            </p>
+          )}
+
           <div className={style.posts_container}>
-            {posts.map((post, index) => (
-              <div
-                className={style.publicacao}
-                key={index}
-                onClick={() => handlePostClick(post)} // Só checa login quando clica
-              >
-                <img className={style.img_post} src={post.img} alt={post.bairro} />
-                <div className={style.conteudo}>
-                  <span className={style.date}>{post.date}</span>
-                  <h3>Bairro: <span className={style.bairro}>{post.bairro}</span></h3>
-                  <h2>Assunto: <span className={style.assunto}>{post.assunto}</span></h2>
-                  {/* Mostra só uma prévia da descrição */}
-                  <span className={style.descricao}>
-                    {post.descricao.length > 120
-                      ? post.descricao.substring(0, 120) + "..."
-                      : post.descricao}
-                  </span>
+            {posts.length > 0 ? (
+              posts.map((post) => (
+                <div
+                  className={style.publicacao}
+                  key={post.id}
+                  onClick={() => handlePostClick(post)}
+                >
+                  <div className={style.conteudo}>
+                    <span className={style.date}>{formatDate(post.moment)}</span>
+                    <h3>
+                      Bairro: <span className={style.bairro}>{post.bairro}</span>
+                    </h3>
+                    <h2>
+                      Assunto: <span className={style.assunto}>{post.assunto}</span>
+                    </h2>
+                    <span className={style.descricao}>
+                      {post.descricao?.length > 120
+                        ? post.descricao.substring(0, 120) + "..."
+                        : post.descricao}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p style={{ textAlign: "center", marginTop: "2rem" }}>
+                Nenhuma publicação encontrada.
+              </p>
+            )}
           </div>
 
-          {/* Modal com conteúdo completo (só se estiver logado) */}
+          {loading && (
+            <p style={{ textAlign: "center", marginTop: "1rem" }}>Carregando...</p>
+          )}
+
+          {isLast && (
+            <p style={{ textAlign: "center", marginTop: "1rem" }}>
+              Você chegou ao final! 🎉
+            </p>
+          )}
+
+          <div ref={loaderRef} style={{ height: "20px" }} />
+
           {selectedPost && (
             <div className={style.modal_overlay} onClick={() => setSelectedPost(null)}>
               <div className={style.modal_content} onClick={(e) => e.stopPropagation()}>
@@ -136,31 +163,25 @@ function Publication() {
                 >
                   ✖
                 </button>
-                <img
-                  src={selectedPost.img}
-                  alt={selectedPost.bairro}
-                  className={style.modal_img}
-                />
                 <div className={style.modal_text}>
                   <h2>{selectedPost.assunto}</h2>
                   <p><strong>Bairro:</strong> {selectedPost.bairro}</p>
-                  <p><strong>Data:</strong> {selectedPost.date}</p>
+                  <p><strong>Data:</strong> {formatDate(selectedPost.moment)}</p>
                   <p>{selectedPost.descricao}</p>
                 </div>
               </div>
             </div>
           )}
 
-          {/* Pop-up de login atualizado */}
           {showPopup && (
             <div className={style.popup_overlay}>
               <div className={style.popup_box}>
-                <p>Você precisa estar logado para ver mais detalhes da publicação.</p>
+                <p>Você precisa estar logado para ver mais detalhes.</p>
                 <div className={style.popup_login}>
-                  <p>Deseja se cadastrar agora? Ou já tem </p>
-                  <button className={style.linkBTN} onClick={() => navigate("/login")} >Login</button>
+                  <button className={style.linkBTN} onClick={() => navigate("/login")}>
+                    Login
+                  </button>
                 </div>
-
                 <div className={style.popup_buttons}>
                   <button onClick={() => navigate("/sing-up")}>Sim</button>
                   <button onClick={() => setShowPopup(false)}>Não</button>
@@ -173,7 +194,7 @@ function Publication() {
 
       <Footer />
     </div>
-  )
+  );
 }
 
-export default Publication
+export default Publication;

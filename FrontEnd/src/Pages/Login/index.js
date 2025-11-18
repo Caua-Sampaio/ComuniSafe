@@ -4,55 +4,49 @@ import Footer from "../../Components/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { useAuth } from "../../Context/AuthContext"; // ⭐ ADICIONADO
+import { API_URL } from "../../Context/Config";
 
 export default function Login() {
-    // estados para armazenar o email, senha e mensagens de retorno
     const [email, setEmail] = useState("");
     const [senha, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
-    // hook do react-router pra redirecionar o usuário
     const navigate = useNavigate();
+    const { login } = useAuth(); // ⭐ USANDO O CONTEXTO
 
-    // função executada ao enviar o formulário
     async function handleEnter(e) {
-    e.preventDefault();
+        e.preventDefault();
 
-    try {
-        const response = await axios.post(
-            "https://nongregarious-alan-wintery.ngrok-free.dev/api/user/login",
-            { email, senha }
-        );
+        try {
+            const response = await axios.post(
+                `${API_URL}/user/login`,
+                { email, senha },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "ngrok-skip-browser-warning": "69420"
+                    }
+                }
+            );
 
-        console.log("🟢 Resposta do backend:", response.data); // 👈 mostra o JSON no console
+            // ⭐ AGORA O LOGIN CENTRALIZADO
+            login(response.data.user, response.data.token);
 
-        // salva token
-        if (response.data.token) {
-            localStorage.setItem("token", response.data.token);
-        }
+            setMessage("Login realizado com sucesso!");
+            navigate("/");
+        } catch (error) {
+            console.error("Erro no login:", error);
 
-        // salva usuário
-        if (response.data.user) {
-            localStorage.setItem("user", JSON.stringify(response.data.user));
-        } else {
-            console.warn("⚠️ Nenhum usuário retornado pelo backend");
-        }
-
-        setMessage("Login realizado com sucesso!");
-        navigate("/");
-    } catch (error) {
-        console.error("🔴 Erro no login:", error);
-
-        if (error.response && error.response.status === 401) {
-            setMessage("Credenciais inválidas");
-        } else if (error.response && error.response.status === 404) {
-            setMessage("Usuário não encontrado");
-        } else {
-            setMessage("Erro no servidor");
+            if (error.response?.status === 401) {
+                setMessage("Credenciais inválidas");
+            } else if (error.response?.status === 404) {
+                setMessage("Usuário não encontrado");
+            } else {
+                setMessage("Erro no servidor");
+            }
         }
     }
-}
-
 
     return (
         <div className={style.body}>
@@ -63,14 +57,13 @@ export default function Login() {
                     <h1 className={style.title}>Login</h1>
 
                     <div className={style.login}>
-                        {/* formulário que dispara o handleEnter */}
                         <form onSubmit={handleEnter}>
                             <div className={style.inputBox}>
                                 <input
                                     type="email"
                                     placeholder="E-mail"
                                     value={email}
-                                    onChange={(e) => setEmail(e.target.value)} // atualiza o estado do email
+                                    onChange={(e) => setEmail(e.target.value)}
                                     required
                                 />
                             </div>
@@ -79,7 +72,7 @@ export default function Login() {
                                 type="password"
                                 placeholder="Senha"
                                 value={senha}
-                                onChange={(e) => setPassword(e.target.value)} // atualiza o estado da senha
+                                onChange={(e) => setPassword(e.target.value)}
                                 className={style.inputSingle}
                                 required
                             />
@@ -89,7 +82,6 @@ export default function Login() {
                             </button>
                         </form>
 
-                        {/* mostra a mensagem de sucesso ou erro */}
                         {message && <p className={style.message}>{message}</p>}
 
                         <div className={style.centralizar}>
