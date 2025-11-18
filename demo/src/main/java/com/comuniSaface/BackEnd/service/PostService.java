@@ -11,7 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,10 +31,16 @@ public class    PostService {
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional(readOnly = true)
-    public Page<PostDTO> findAll(Pageable pageable){
-        Page<PostEntity> result = postRepository.findAllByDeletadoFalse(pageable);
-        return result.map(PostDTO::new);
+
+
+    public Page<PostDTO> findAll(Pageable pageable) {
+        Pageable sortedPageable = PageRequest.of(
+                pageable.getPageNumber(),
+                pageable.getPageSize(),
+                Sort.by("id").descending()
+        );
+        Page<PostEntity> page = postRepository.findAll(sortedPageable);
+        return page.map(PostDTO::new);
     }
 
     @Transactional(readOnly = true)
@@ -87,7 +95,7 @@ public class    PostService {
         }
         if (midia != null && !midia.isEmpty()) {
             byte[] bytes = midia.getBytes();
-            entity.setMidia(bytes);
+            entity.setMidia(midia.getBytes());
         }
     }
 }

@@ -21,13 +21,14 @@ public class PostEntity {
     private String descricao;
     @Column(name = "midia")
     private byte[] midia;
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = true)
-    private UserEntity usuario;
     @Column(name = "deletado", nullable = false)
     private Boolean deletado = false;
     @Column(name = "dataDelecao")
     private Instant dataDelecao;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = true)
+    private UserEntity usuario;
     public PostEntity(){}
     public PostEntity(Long id, String bairro, String cidade, LocalDate moment, String assunto, String descricao, byte[] midia, UserEntity usuario, Boolean deletado, Instant dataDelecao) {
         this.id = id;

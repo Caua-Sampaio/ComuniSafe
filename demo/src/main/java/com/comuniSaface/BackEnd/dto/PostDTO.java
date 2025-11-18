@@ -3,7 +3,7 @@ import com.comuniSaface.BackEnd.entities.PostEntity;
 import lombok.Data;
 import java.time.Instant;
 import java.time.LocalDate;
-@Data
+
 public class PostDTO {
     private Long id;
     private String bairro;
@@ -15,6 +15,20 @@ public class PostDTO {
     private Long usuarioId;
     private Boolean deletado;
     private Instant dataDelecao;
+    public PostDTO(){};
+    public PostDTO(Long id, String bairro, String cidade, LocalDate moment, String assunto, String descricao, byte[] midia, Long usuarioId, Boolean deletado, Instant dataDelecao) {
+        this.id = id;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.moment = moment;
+        this.assunto = assunto;
+        this.descricao = descricao;
+        this.midia = midia;
+        this.usuarioId = usuarioId;
+        this.deletado = deletado;
+        this.dataDelecao = dataDelecao;
+    }
+
     public PostDTO(PostEntity entity) {
         this.id = entity.getId();
         this.bairro = entity.getBairro();
@@ -50,5 +64,9 @@ public class PostDTO {
     }
     public Boolean getDeletado() {
         return deletado;
+    }
+
+    public byte[] getMidia() {
+        return midia;
     }
 }
