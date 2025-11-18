@@ -24,6 +24,7 @@ public class PostController {
     private PostService postService;
     @Autowired
     private ObjectMapper objectMapper;
+
     @GetMapping("/allPosts")
     public ResponseEntity<Page<PostDTO>> findAll(Pageable pageable){
         Page<PostDTO> page = postService.findAll(pageable);

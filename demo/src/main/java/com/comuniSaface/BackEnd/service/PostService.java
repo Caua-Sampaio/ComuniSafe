@@ -53,6 +53,13 @@ public class    PostService {
     public PostDTO update(Long id, PostDTO dto, MultipartFile midiaFile) throws IOException{
         try {
             PostEntity entity = postRepository.getReferenceById(id);
+            Long dtoUsuarioId = dto.getUsuarioId();
+            if (dtoUsuarioId == null) {
+                throw new IllegalArgumentException("usuarioId deve ser informado para editar a publicação");
+            }
+            if (entity.getUsuario() == null || !entity.getUsuario().getId().equals(dtoUsuarioId)) {
+                throw new IllegalArgumentException("Você não tem permissão para editar esta publicação");
+            }
             copyDtoToEntity(dto, entity, midiaFile);
             entity = postRepository.save(entity);
             return new PostDTO(entity);
