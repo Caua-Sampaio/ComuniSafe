@@ -5,7 +5,6 @@ import com.comuniSaface.BackEnd.service.PostService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,14 +25,11 @@ public class PostController {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @GetMapping(value = "/allPosts", produces = "application/json")
-    public ResponseEntity<Page<PostDTO>> findAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "2") int size
-    ) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<PostDTO> result = postService.findAll(pageable);
-        return ResponseEntity.ok(result);
+    @GetMapping("/allPosts")
+    public ResponseEntity<Page<PostDTO>> findAll(Pageable pageable){
+        Page<PostDTO> page = postService.findAll(pageable);
+        return ResponseEntity.ok(page);
+
     }
     @PutMapping("/myPosts/{usuarioId}")
     public ResponseEntity<Page<PostDTO>> findByUser(@PathVariable Long usuarioId, Pageable pageable){
@@ -53,12 +49,11 @@ public class PostController {
     }
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<PostDTO> update(
-            @PathVariable Long id,
             @RequestPart("post") String postJson,
             @RequestPart(value = "midia", required = false) MultipartFile midia
     ) throws IOException {
         PostDTO dto = objectMapper.readValue(postJson, PostDTO.class);
-        dto = postService.update(id, dto, midia);
+        dto = postService.update(dto, midia);
         return ResponseEntity.ok(dto);
     }
     @DeleteMapping("/{postId}/usuario/{usuarioId}")

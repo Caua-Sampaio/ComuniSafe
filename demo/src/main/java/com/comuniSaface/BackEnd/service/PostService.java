@@ -58,17 +58,22 @@ public class    PostService {
     }
 
     @Transactional
-    public PostDTO update(Long id, PostDTO dto, MultipartFile midiaFile) throws IOException{
+    public PostDTO update(PostDTO dto, MultipartFile midiaFile) throws IOException{
         try {
-            PostEntity entity = postRepository.getReferenceById(id);
+            PostEntity entity = postRepository.getReferenceById(dto.getId());
+            if (dto.getUsuarioId() == null) {
+                throw new IllegalArgumentException("usuarioId deve ser informado para editar a publicação");
+            }
+            if (entity.getUsuario() == null || !entity.getUsuario().getId().equals(dto.getUsuarioId())) {
+                throw new IllegalArgumentException("Você não tem permissão para editar esta publicação");
+            }
             copyDtoToEntity(dto, entity, midiaFile);
             entity = postRepository.save(entity);
             return new PostDTO(entity);
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Post não encontrado: " + id);
+            throw new ResourceNotFoundException("Post não encontrado: " + dto.getId());
         }
     }
-
     @Transactional
     public void deletarPorId(Long postId, Long usuarioId){
         PostEntity entity = postRepository.findByIdAndDeletadoFalse(postId)
