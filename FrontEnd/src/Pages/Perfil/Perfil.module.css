@@ -1,83 +1,94 @@
+/* Importa a fonte Inter do Google Fonts com pesos 400, 600 e 700 */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
+/* Corpo da página */
 .body {
-    background-color: var(--bg-color);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);  /* fundo da página */
+    min-height: 100vh;                  /* altura mínima da tela inteira */
+    display: flex;                      /* flexbox para organizar elementos */
+    flex-direction: column;             /* coluna vertical */
+    font-family: 'Inter', sans-serif;  /* fonte principal */
 }
 
+/* Container central da página */
 .container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 6rem 1rem 2rem;
+    flex: 1;                             /* ocupa todo espaço disponível */
+    display: flex;                       /* flexbox */
+    justify-content: center;             /* centraliza horizontalmente */
+    align-items: center;                 /* centraliza verticalmente */
+    padding: 6rem 1rem 2rem;             /* espaçamento interno */
 }
 
+/* Cartão do perfil */
 .profile_card {
-    display: flex;
-    align-items: center;
-    background-color: var(--snd-bg-color);
-    padding: 2rem 3rem;
-    border-radius: 20px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    max-width: 700px;
-    width: 100%;
-    transition: transform 0.2s ease-in-out;
+    display: flex;                       /* flexbox para alinhar imagem e info */
+    align-items: center;                 /* centraliza verticalmente */
+    background-color: var(--snd-bg-color); /* fundo do cartão */
+    padding: 2rem 3rem;                  /* espaçamento interno */
+    border-radius: 20px;                 /* cantos arredondados */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* sombra suave */
+    max-width: 700px;                    /* largura máxima do cartão */
+    width: 100%;                          /* ocupa largura total do container */
+    transition: transform 0.2s ease-in-out; /* animação ao passar o mouse */
 }
 
+/* Efeito hover do cartão */
 .profile_card:hover {
-    transform: scale(1.01);
+    transform: scale(1.01);             /* aumenta levemente o cartão */
 }
 
+/* Container da imagem do perfil */
 .profile_image {
-    flex: 1;
+    flex: 1;                             /* ocupa 1 parte do espaço */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
+/* Estilização da imagem do perfil */
 .profile_image img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--main-color);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    margin-bottom: 1rem;
+    width: 150px;                        /* largura fixa */
+    height: 150px;                       /* altura fixa */
+    border-radius: 50%;                  /* deixa circular */
+    object-fit: cover;                   /* cobre todo o espaço sem distorcer */
+    border: 3px solid var(--main-color); /* borda colorida */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* sombra */
+    margin-bottom: 1rem;                 /* espaço abaixo da imagem */
 }
 
-/* Botão de upload */
+/* Botão de upload de imagem */
 .upload_label {
-    background-color: var(--main-color);
-    color: white;
+    background-color: var(--main-color); /* fundo do botão */
+    color: white;                        /* texto branco */
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    cursor: pointer;                     /* cursor de clique */
+    transition: all 0.3s ease;           /* animação suave */
     font-size: 0.9rem;
 }
 
+/* Hover do botão de upload */
 .upload_label:hover {
-    background-color: #1d9a7c;
+    background-color: #1d9a7c;           /* cor diferente ao passar o mouse */
 }
 
+/* Input de arquivo escondido */
 .hidden_input {
     display: none;
 }
 
+/* Container das informações do perfil */
 .profile_info {
-    flex: 2;
-    margin-left: 2rem;
-    color: var(--text-color);
+    flex: 2;                             /* ocupa 2 partes do espaço */
+    margin-left: 2rem;                   /* distância da imagem */
+    color: var(--text-color);            /* cor do texto */
     display: flex;
     flex-direction: column;
 }
 
+/* Título do perfil */
 .profile_info h2 {
     margin-bottom: 1rem;
     font-size: 1.8rem;
@@ -85,16 +96,20 @@
     color: var(--main-color);
 }
 
+/* Parágrafos do perfil */
 .profile_info p {
     margin: 0.5rem 0;
     font-size: 1rem;
 }
 
+/* Destaque de texto forte */
 .profile_info strong {
     color: var(--main-color);
 }
 
 /* ==== Botões ==== */
+
+/* Botão de editar */
 .edit_button {
     margin-top: 1.5rem;
     background-color: var(--main-color);
@@ -105,15 +120,16 @@
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: fit-content;
+    width: fit-content;                  /* ocupa apenas o necessário */
 }
 
+/* Hover do botão editar */
 .edit_button:hover {
     background-color: #1d9a7c;
-    transform: scale(1.05);
+    transform: scale(1.05);              /* aumenta levemente */
 }
 
-/* Inputs */
+/* Campos de input */
 .input_field {
     margin: 0.4rem 0;
     padding: 0.6rem;
@@ -124,16 +140,19 @@
     outline: none;
 }
 
+/* Foco nos inputs */
 .input_field:focus {
     border-color: var(--main-color);
 }
 
+/* Container de botões de salvar e cancelar */
 .edit_buttons {
     display: flex;
     gap: 0.8rem;
     margin-top: 1rem;
 }
 
+/* Botão salvar */
 .save_button {
     background-color: var(--main-color);
     color: white;
@@ -144,10 +163,12 @@
     transition: 0.3s ease;
 }
 
+/* Hover do botão salvar */
 .save_button:hover {
     background-color: #1d9a7c;
 }
 
+/* Botão cancelar */
 .cancel_button {
     background-color: #e74c3c;
     color: white;
@@ -158,6 +179,7 @@
     transition: 0.3s ease;
 }
 
+/* Hover do botão cancelar */
 .cancel_button:hover {
     background-color: #c0392b;
 }
@@ -165,18 +187,18 @@
 /* ==== Responsividade ==== */
 @media (max-width: 700px) {
     .profile_card {
-        flex-direction: column;
+        flex-direction: column;          /* empilha imagem e info */
         text-align: center;
         padding: 2rem;
     }
 
     .profile_info {
         margin-left: 0;
-        margin-top: 1.5rem;
+        margin-top: 1.5rem;             /* espaço acima da info */
     }
 
     .edit_button {
         margin-left: auto;
-        margin-right: auto;
+        margin-right: auto;              /* centraliza o botão */
     }
 }

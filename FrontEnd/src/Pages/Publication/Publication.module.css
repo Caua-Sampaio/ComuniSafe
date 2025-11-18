@@ -1,94 +1,107 @@
+/* Importa as fontes Inter e Outfit do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap');
 
-
+/* Corpo da página */
 .body {
-  padding: 20px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif; /* define a fonte principal */
 }
 
+/* Container principal da seção sobre */
 .sobre {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1200px; /* largura máxima */
+  margin: 0 auto;    /* centraliza horizontalmente */
 }
 
+/* Título da seção */
 .title {
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: 2rem;  /* tamanho grande para destaque */
+  margin-bottom: 20px; /* espaço abaixo do título */
 }
 
+/* Container dos posts em grid */
 .posts_container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-top: 20px;
+  display: grid;                   /* layout em grid */
+  grid-template-columns: repeat(2, 1fr); /* duas colunas de tamanho igual */
+  gap: 20px;                       /* espaço entre os itens */
+  margin-top: 20px;                /* espaço acima do grid */
 }
 
 /* Cada post */
 .publicacao {
-  background: #f8f8f8;
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #f8f8f8;             /* fundo claro */
+  border-radius: 10px;             /* cantos arredondados */
+  overflow: hidden;                /* corta conteúdo que ultrapassa a borda */
+  cursor: pointer;                 /* cursor indicando clique */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* sombra leve */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* animação suave */
 }
 
+/* Hover do post */
 .publicacao:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transform: translateY(-3px);     /* levanta o post levemente */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* sombra mais forte */
 }
 
+/* Imagem do post */
 .img_post {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+  width: 100%;       /* ocupa toda largura do container */
+  height: 180px;     /* altura fixa */
+  object-fit: cover; /* cobre o espaço sem distorcer */
 }
 
+/* Conteúdo do post */
 .conteudo {
-  padding: 15px;
+  padding: 15px;      /* espaço interno */
 }
 
+/* Data do post */
 .date {
   font-size: 0.9rem;
-  color: #666;
+  color: #666;       /* cinza claro */
 }
 
+/* Bairro do post */
 .bairro {
   font-weight: 500;
 }
 
+/* Assunto do post */
 .assunto {
   font-weight: 600;
-  color: #222;
+  color: #222;       /* texto escuro */
 }
 
+/* Descrição do post */
 .descricao {
   display: block;
   margin-top: 10px;
   color: #333;
-  line-height: 1.4;
+  line-height: 1.4;   /* espaçamento entre linhas */
 }
 
-/* Responsivo */
+/* Responsividade: 1 coluna em telas menores */
 @media (max-width: 768px) {
   .posts_container {
     grid-template-columns: 1fr;
   }
 }
 
-/* --- POP-UP --- */
+/* ===== POP-UP ===== */
+
+/* Overlay escurecido do modal */
 .modal_overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  position: fixed;                   /* fixa na tela */
+  inset: 0;                           /* ocupa toda a tela */
+  background: rgba(0, 0, 0, 0.6);    /* fundo semitransparente */
   display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  backdrop-filter: blur(2px);
-  animation: fadeIn 0.3s ease forwards;
+  justify-content: center;            /* centraliza horizontalmente */
+  align-items: center;                /* centraliza verticalmente */
+  z-index: 999;                       /* acima de tudo */
+  backdrop-filter: blur(2px);         /* efeito de desfoque */
+  animation: fadeIn 0.3s ease forwards; /* animação de aparecimento */
 }
 
+/* Conteúdo do modal */
 .modal_content {
   background: #fff;
   border-radius: 12px;
@@ -96,23 +109,26 @@
   max-width: 700px;
   overflow: hidden;
   position: relative;
-  transform: scale(0.9);
-  opacity: 0;
-  animation: zoomIn 0.25s ease forwards;
+  transform: scale(0.9);             /* começa menor */
+  opacity: 0;                         /* começa transparente */
+  animation: zoomIn 0.25s ease forwards; /* animação de zoom */
 }
 
+/* Imagem dentro do modal */
 .modal_img {
   width: 100%;
   height: 250px;
   object-fit: cover;
 }
 
+/* Texto do modal */
 .modal_text {
   padding: 20px;
 }
 
+/* Botão de fechar modal */
 .close_button {
-  position: absolute;
+  position: absolute;                  /* posicionado em relação ao modal */
   top: 10px;
   right: 15px;
   background: none;
@@ -123,10 +139,12 @@
   transition: color 0.2s;
 }
 
+/* Hover no botão fechar */
 .close_button:hover {
   color: red;
 }
 
+/* Animações de entrada */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -137,9 +155,8 @@
   to { transform: scale(1); opacity: 1; }
 }
 
-/* Fundo escurecido (overlay) */
+/* ===== POP-UP (alternativo) ===== */
 .popup_overlay {
-  
   position: fixed;
   top: 0;
   left: 0;
@@ -149,11 +166,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999; /* garante que fica acima de tudo */
+  z-index: 999;
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Caixa branca central do popup */
+/* Caixa branca do popup */
 .popup_box {
   background-color: #fff;
   border-radius: 16px;
@@ -173,16 +190,17 @@
   line-height: 1.4;
 }
 
+/* Container para login dentro do popup */
 .popup_login {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.3rem;
-
 }
 
+/* Link estilizado como botão */
 .linkBTN {
-    display: inline-block;       /* permite padding e centralização via text-align do container */
+    display: inline-block;       
     color: #0077ff;
     text-decoration: none;
     font-size: 1rem;
@@ -192,12 +210,13 @@
     background-color: #fff;
 }
 
+/* Hover do link */
 .linkBTN:hover {
     text-decoration: underline;
     transition: all 0.2s ease-in-out;
 }
 
-/* Container dos botões */
+/* Container de botões do popup */
 .popup_buttons {
   display: flex;
   justify-content: center;
@@ -205,7 +224,7 @@
   margin-top: 2rem;
 }
 
-/* Botões */
+/* Estilização geral dos botões */
 .popup_buttons button {
   padding: 0.6rem 1.4rem;
   border: none;
@@ -216,36 +235,29 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* Botão “Sim” */
+/* Botão "Sim" */
 .popup_buttons button:first-child {
   background-color: #0077ff;
   color: #fff;
 }
 
+/* Hover do botão "Sim" */
 .popup_buttons button:first-child:hover {
   background-color: #005fd1;
 }
 
-/* Botão “Não” */
+/* Botão "Não" */
 .popup_buttons button:last-child {
   background-color: #e0e0e0;
   color: #333;
 }
 
+/* Hover do botão "Não" */
 .popup_buttons button:last-child:hover {
   background-color: #cfcfcf;
 }
 
 /* Animações */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 @keyframes slideUp {
   from {
     transform: translateY(30px);

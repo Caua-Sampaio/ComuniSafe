@@ -1,100 +1,96 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
+/*------------------------------------------------- HEADER -------------------------------------------------*/
 
-/*------------------------------------------------- Configurações Header ------------------------------------------------- */
-
-
-
-.header{
-position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 6rem;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    
-    justify-content: space-between;
-    padding: 2rem 5%;
-    background-color: var(--snd-bg-color);
-    backdrop-filter: blur(10px);
-    transition: all 0.5s ease;
-    font-family: 'Inter', sans-serif;
-
+/* Container principal do header */
+.header {
+  position: fixed; /* Fixa no topo */
+  top: 0;
+  left: 0;
+  width: 100%; /* ocupa toda a largura */
+  height: 6rem;
+  z-index: 1000; /* acima do conteúdo */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  background-color: var(--snd-bg-color); /* cor de fundo */
+  backdrop-filter: blur(10px); /* efeito de blur atrás do header */
+  font-family: 'Inter', sans-serif;
 }
 
-    .header .logo{
-        color: var(--text-color);
-        font-weight: 600;
-        margin-left: 1.5rem;
-        transition: color 0.3s ease;
-    }
+/* Logo */
+.logo h2 {
+  color: var(--text-color);
+  cursor: pointer;
+  font-weight: 600;
+}
 
-    .header .logo:hover{
-        color: var(--main-color);
-        cursor: pointer;
-    }
+/* Navbar desktop */
+.navbar {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+}
 
-        .header .navbar .nav_links{
-            list-style: none; /* Remove os marcadores de lista */
-            margin: 0 ;
-            padding: 0;
-            display: flex; /* Para alinhar os links lado a lado */
-            gap: 1.5rem; /* Espaço entre os links */
-            justify-content: center;
-            align-items: center;
-        }
+.nav_links {
+  display: flex;
+  list-style: none; /* remove bullets */
+  gap: 1.5rem; /* espaço entre links */
+  align-items: center;
+}
 
-            .header .navbar .nav-links li{
-                    font-size: 1rem;
-                    color: var(--text-color);
-                    font-weight: 500;
-                    transition: 0.3s ease;
+/* Estilo dos links e botões */
+.nav_links li a,
+.nav_links li button {
+  font-size: 1rem;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+  
+}
 
-            }
-
-
-
-/* ====== MENU DO PERFIL ====== */
+/* ====== MENU PERFIL ====== */
 .profile_menu {
-  position: relative;
+  position: relative; /* para posicionar o dropdown */
 }
 
 .profile_button {
   background: none;
   border: none;
   cursor: pointer;
-width: 35px;
+  width: 35px;
   height: 35px;
 }
 
 .profile_img {
   width: 35px;
   height: 35px;
-  border-radius: 50%;
+  border-radius: 50%; /* deixa redonda */
   object-fit: cover;
   border: 2px solid white;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s;
 }
 
 .profile_img:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* efeito hover */
 }
 
-/* Dropdown menu */
+/* Dropdown do perfil */
 .dropdown_menu {
   position: absolute;
-  top: 50px;
+  top: 50px; /* abaixo do botão */
   right: 0;
   background: #fff;
   color: #333;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   list-style: none;
-  padding: 0.5rem 0;
   width: 180px;
-  z-index: 10;
+  padding: 0.5rem 0;
+  z-index: 1001;
   animation: fadeIn 0.2s ease-in-out;
 }
 
@@ -104,23 +100,82 @@ width: 35px;
 
 .dropdown_menu a,
 .dropdown_menu button {
-  color: #333;
-  text-decoration: none;
-  font-size: 0.95rem;
   width: 100%;
-  background: none;
-  border: none;
-  cursor: pointer;
   text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 0.95rem;
 }
 
+/* Animação dropdown */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/*------------------------------------------------- HAMBURGER MOBILE -------------------------------------------------*/
+
+/* Hamburger container */
+.hamburger {
+  display: none; /* só aparece no mobile */
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 22px;
+  cursor: pointer;
+  z-index: 1100; /* acima da navbar */
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: var(--text-color);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Hamburger ativo → transforma em X */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px,5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px,-5px);
+}
+
+/* Navbar mobile */
+@media (max-width: 800px) {
+  .hamburger { display: flex; } /* aparece no mobile */
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: -100%; /* escondida inicialmente */
+    width: 100%;
+    height: 100vh;
+    background-color: var(--snd-bg-color);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transition: left 0.3s ease;
+    z-index: 1000;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .navbar.active { left: 0; } /* quando aberto */
+
+  .nav_links { flex-direction: column; gap: 2rem; text-align: center; }
+
+  /* Links e botões maiores no mobile */
+  .nav_links li a,
+  .nav_links li button {
+    font-size: 1.5rem;
+    padding: 0.8rem 2rem;
   }
 }

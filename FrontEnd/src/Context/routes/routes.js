@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 
+// Páginas
 import Home from "../../Pages/Home";
 import Login from "../../Pages/Login";
 import SingUp from "../../Pages/SingUp";
@@ -11,22 +12,24 @@ import MyPosts from "../../Pages/MyPosts";
 import NewPublications from "../../Pages/New_Publications";
 import Success from "../../Pages/Success";
 
+// Proteção de rota — só entra se estiver logado
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
 
+  // Evita piscar a tela antes de descobrir se tem usuário salvo
   if (loading) {
-    // Evita redirecionar antes de saber se o usuário está logado
     return <div>Carregando...</div>;
   }
 
+  // Se tiver user → libera | Se não → manda pro login
   return user ? children : <Navigate to="/login" />;
 }
-
 
 function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Rotas públicas */}
         <Route path="/" element={<Home />} />
         <Route path="/emergencia" element={<Emergence />} />
         <Route path="/publicacoes" element={<Publication />} />
@@ -34,6 +37,7 @@ function AppRoutes() {
         <Route path="/sing-up" element={<SingUp />} />
         <Route path="/success" element={<Success />} />
 
+        {/* Rotas privadas */}
         <Route
           path="/nova-publicacao"
           element={
@@ -42,6 +46,7 @@ function AppRoutes() {
             </PrivateRoute>
           }
         />
+
         <Route
           path="/perfil"
           element={
@@ -50,6 +55,7 @@ function AppRoutes() {
             </PrivateRoute>
           }
         />
+
         <Route
           path="/meus-posts"
           element={
@@ -59,6 +65,7 @@ function AppRoutes() {
           }
         />
 
+        {/* Se cair em rota inexistente → volta pra Home */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

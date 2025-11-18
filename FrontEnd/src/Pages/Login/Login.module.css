@@ -1,3 +1,4 @@
+/* Define a fonte principal, cor de fundo, altura mínima da tela e organiza os elementos em coluna */
 .body {
     font-family: 'Arial', sans-serif;
     background-color: #f5f5f5;
@@ -6,23 +7,26 @@
     flex-direction: column;
 }
 
+/* Main ocupa espaço restante da tela e centraliza seu conteúdo */
 main {
     flex: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* centraliza horizontalmente */
+    align-items: center;     /* centraliza verticalmente */
     padding: 40px 20px;
 }
 
+/* Container da seção "sobre", com limite de largura, fundo branco, padding, borda arredondada e sombra */
 .sobre {
     width: 100%;
     max-width: 500px;
     background-color: #fff;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* sombra suave */
 }
 
+/* Título centralizado com tamanho maior e cor escura */
 .title {
     text-align: center;
     font-size: 2rem;
@@ -30,34 +34,37 @@ main {
     color: #333;
 }
 
+/* Formulário de login com campos empilhados e espaçamento entre eles */
 .login form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 20px; /* espaço entre os inputs */
 }
 
+/* Container de inputs que devem ficar lado a lado */
 .inputBox {
     display: flex;
-    gap: 20px;
+    gap: 20px; /* espaço entre os inputs */
 }
 
-/* Inputs dentro do input-box */
+/* Estiliza os inputs dentro do inputBox */
 .inputBox input {
-    flex: 1;
+    flex: 1; /* ocupa o máximo de espaço possível */
     padding: 12px 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 1rem;
-    transition: all 0.2s;
+    transition: all 0.2s; /* animação suave para hover/focus */
 }
 
+/* Efeito visual quando o input recebe foco */
 .inputBox input:focus {
-    outline: none;
-    border-color: #0077ff;
-    box-shadow: 0 0 5px rgba(0,119,255,0.2);
+    outline: none; /* remove contorno padrão do navegador */
+    border-color: #0077ff; /* muda a cor da borda */
+    box-shadow: 0 0 5px rgba(0,119,255,0.2); /* sombra azul suave */
 }
 
-/* Input único fora do input-box (senha) */
+/* Input único fora do inputBox (geralmente senha) */
 .inputSingle {
     width: 100%;
     padding: 12px 15px;
@@ -67,42 +74,47 @@ main {
     transition: all 0.2s;
 }
 
+/* Mesmo efeito de foco para inputSingle */
 .inputSingle:focus {
     outline: none;
     border-color: #0077ff;
     box-shadow: 0 0 5px rgba(0,119,255,0.2);
 }
 
+/* Botão principal */
 .btn {
     padding: 12px;
-    background-color: #0077ff;
+    background-color: #0077ff; /* azul vibrante */
     color: #fff;
     font-weight: bold;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s; /* animação suave para hover */
 }
 
+/* Mudança de cor do botão ao passar o mouse */
 .btn:hover {
-    background-color: #005ecb;
+    background-color: #005ecb; /* azul mais escuro */
 }
 
+/* Mensagem de erro ou aviso centralizada */
 .message {
     text-align: center;
     margin-top: 15px;
-    color: #ff4d4f;
+    color: #ff4d4f; /* vermelho forte */
     font-weight: bold;
 }
 
-
+/* Classe genérica para centralizar elementos horizontalmente */
 .centralizar {
     display: flex;
-    justify-content: center; /* centraliza horizontalmente */
+    justify-content: center;
 }
 
+/* Estiliza links que parecem botões */
 .linkBTN {
-    display: inline-block;       /* permite padding e centralização via text-align do container */
+    display: inline-block;       /* permite padding e centralização */
     color: #0077ff;
     font-weight: bold;
     text-decoration: none;
@@ -110,6 +122,7 @@ main {
     text-align: center;
 }
 
+/* Efeito hover para links que parecem botões */
 .linkBTN:hover {
     text-decoration: underline;
 }

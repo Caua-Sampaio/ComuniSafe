@@ -1,121 +1,121 @@
+/* Importa as fontes Inter e Outfit do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap');
 
-
+/* Reset básico de estilos para todos os elementos */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    border: none;
-    outline: none;
-    scroll-behavior: smooth;
-
+    margin: 0;                  /* remove margens padrão */
+    padding: 0;                 /* remove padding padrão */
+    box-sizing: border-box;     /* inclui padding e border no tamanho total */
+    text-decoration: none;      /* remove sublinhado de links */
+    border: none;               /* remove bordas padrão */
+    outline: none;              /* remove contorno ao focar elementos */
+    scroll-behavior: smooth;    /* rolagem suave */
 }
 
-/* Variáveis de cores */
+/* ------------------------------------------------- Variáveis de cores ------------------------------------------------- */
 :root { 
-    --bg-color: #F9FAFB;
-    --snd-bg-color: #F0F0F0;
-
-    --main-color: #3B82F6;
-    --snd-main-color: #06B6D4;
-
-    --text-color: ##1E293B;
-    --elements: #E2E8F0;
+    --bg-color: #F9FAFB;       /* cor de fundo principal */
+    --snd-bg-color: #F0F0F0;   /* cor de fundo secundário */
+    --main-color: #3B82F6;     /* cor principal (azul) */
+    --snd-main-color: #06B6D4; /* cor secundária (turquesa) */
+    --text-color: #1E293B;    /* cor do texto (note: há um erro, tem ## duplo) */
+    --elements: #E2E8F0;       /* cor de elementos */
 }
 
-/* ------------------------------------------------- Configurações Gerais ------------------------------------------------- */
-/* Para estilizar a barra de rolagem de todo o documento */
+/* ------------------------------------------------- Estilização da barra de rolagem ------------------------------------------------- */
 html {
-  width: 100%; /* Largura da barra de rolagem */
+  width: 100%; /* largura da barra de rolagem */
 }
 html::-webkit-scrollbar {
-  width: 10px; /* Largura */
+  width: 10px; /* largura da barra */
 }
 html::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Cor da trilha */
+  background: #f1f1f1; /* cor da trilha */
 }
 html::-webkit-scrollbar-thumb {
-  background: #888; /* Cor da alça */
-  border-radius: 5px; /* Bordas arredondadas */
+  background: #888; /* cor do "polegar" */
+  border-radius: 5px; /* bordas arredondadas */
 }
 html::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Cor da alça ao passar o mouse */
+  background: #555; /* cor ao passar o mouse */
 }
 
+/* Corpo da página */
 .body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    font-size: 16px;
+    font-family: 'Inter', sans-serif; /* fonte principal */
+    background-color: var(--bg-color); /* fundo definido na variável */
+    color: var(--text-color);          /* cor do texto */
+    line-height: 1.6;                  /* altura das linhas */
+    font-size: 16px;                   /* tamanho padrão do texto */
 }
 
+/* Títulos */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Outfit', sans-serif; /* fonte diferente para títulos */
     color: var(--text-color);
-    margin-bottom: 1rem;
+    margin-bottom: 1rem;               /* espaço abaixo dos títulos */
 }
 
+/* Links padrão */
 a{
-    color: var(--text-color);
+    color: var(--text-color);           /* cor padrão do link */
 }
 
+/* Links ativos ou hover */
 a:hover,
 a.active {
-        text-shadow: 0 0 10px var(--main-color);
-        cursor: pointer;
-        transform: scale(1.05);
+    text-shadow: 0 0 10px var(--main-color); /* efeito de brilho azul */
+    cursor: pointer;                          /* cursor de clique */
+    transform: scale(1.05);                   /* aumenta levemente */
 }
 
-
-
+/* Botões padrão */
 .btn{
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    background: var(--main-color);
-    border-radius: 4rem;
+    display: inline-block;                     /* permite padding e efeitos */
+    padding: 1rem 2.5rem;                      /* espaçamento interno */
+    background: var(--main-color);             /* cor de fundo azul */
+    border-radius: 4rem;                       /* bordas arredondadas estilo "pill" */
     box-shadow: none;
     font-size: 1rem;
     color: var(--text-color);
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.1rem;                    /* espaçamento entre letras */
     font-weight: 500;
-    cursor: pointer;
-    transition: 0.3s ease;
+    cursor: pointer;                           /* cursor de clique */
+    transition: 0.3s ease;                     /* animação suave */
     font-family: 'Inter', sans-serif;
 }
 
-    .btn:hover,
-    .btn:focus{
-        background: var(--elements);
-        color: var(--snd-main-color);
-        box-shadow: 0 0 20px var(--snd-main-color);
-        transform: scale(1.05);
-    }
-
-
-main{
-    margin-top: 6rem; /* Espaço para o header fixo */
-    padding: 2rem;
+/* Hover e foco do botão */
+.btn:hover,
+.btn:focus{
+    background: var(--elements);                /* muda fundo */
+    color: var(--snd-main-color);              /* muda cor do texto */
+    box-shadow: 0 0 20px var(--snd-main-color);/* brilho turquesa */
+    transform: scale(1.05);                     /* aumenta levemente */
 }
 
-    main .sobre{
-        background-color: var(--snd-bg-color);
-        border-radius: 1rem;
-        min-height: 65vh;
-        max-width: 70vw;
-        margin: 1rem auto;
-        padding: 7rem 9% 2rem;
-        justify-content: center;
-        align-items: center;
-        font-family: 'Inter', sans-serif;
-    }
+/* Configuração do main */
+main{
+    margin-top: 6rem; /* espaço para header fixo */
+    padding: 2rem;    /* padding interno */
+}
 
-        main .sobre .title{
-            width: 100%;
-            font-size: 3rem;
-            text-align: center;
-        }
+/* Seção sobre dentro do main */
+main .sobre{
+    background-color: var(--snd-bg-color); /* fundo secundário */
+    border-radius: 1rem;                   /* cantos arredondados */
+    min-height: 65vh;                      /* altura mínima */
+    max-width: 70vw;                       /* largura máxima relativa à tela */
+    margin: 1rem auto;                     /* centraliza horizontalmente e espaço vertical */
+    padding: 7rem 9% 2rem;                 /* padding interno: topo, laterais, fundo */
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+}
 
-
-        
+/* Título dentro da seção sobre */
+main .sobre .title{
+    width: 100%;               /* ocupa toda a largura do container */
+    font-size: 3rem;           /* tamanho grande */
+    text-align: center;        /* centraliza o texto */
+}

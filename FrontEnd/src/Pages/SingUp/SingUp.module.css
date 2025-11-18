@@ -1,122 +1,136 @@
+/* Corpo da página */
 .body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f5f5f5;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    font-family: 'Arial', sans-serif;   /* define a fonte principal */
+    background-color: #f5f5f5;          /* fundo claro */
+    min-height: 100vh;                  /* altura mínima da tela inteira */
+    display: flex;                      /* flexbox para organizar elementos */
+    flex-direction: column;             /* organiza em coluna */
 }
 
+/* Main da página */
 main {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
+    flex: 1;                            /* ocupa todo espaço disponível */
+    display: flex;                      /* flexbox */
+    justify-content: center;            /* centraliza horizontalmente */
+    align-items: center;                /* centraliza verticalmente */
+    padding: 40px 20px;                 /* espaço interno: topo/baixo e lateral */
 }
 
+/* Container da seção sobre */
 .sobre {
-    width: 100%;
-    max-width: 500px;
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    width: 100%;                         /* ocupa largura total */
+    max-width: 500px;                    /* largura máxima */
+    background-color: #fff;              /* fundo branco */
+    padding: 40px;                       /* espaço interno */
+    border-radius: 10px;                 /* cantos arredondados */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* sombra suave */
 }
 
+/* Título da página/seção */
 .title {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 30px;
-    color: #333;
+    text-align: center;                  /* centraliza horizontalmente */
+    font-size: 2rem;                     /* tamanho maior */
+    margin-bottom: 30px;                 /* espaço abaixo do título */
+    color: #333;                         /* cor do texto */
 }
 
+/* Formulário dentro da classe singUp */
 .singUp form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    display: flex;                       /* flexbox */
+    flex-direction: column;              /* empilha verticalmente */
+    gap: 20px;                           /* espaçamento entre campos */
 }
 
+/* Container de inputs lado a lado */
 .inputBox {
-    display: flex;
-    gap: 20px;
+    display: flex;                       /* organiza inputs em linha */
+    gap: 20px;                           /* espaço entre eles */
 }
 
-/* Inputs dentro do input-box */
+/* Inputs dentro do inputBox */
 .inputBox input {
-    flex: 1;
-    padding: 12px 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.2s;
-
+    flex: 1;                              /* ocupa todo espaço disponível */
+    padding: 12px 15px;                   /* espaço interno */
+    border: 1px solid #ccc;               /* borda cinza */
+    border-radius: 8px;                   /* cantos arredondados */
+    font-size: 1rem;                      /* tamanho do texto */
+    transition: all 0.2s;                 /* animação suave */
 }
 
+/* Efeito quando o input está em foco */
 .inputBox input:focus {
-    outline: none;
-    border-color: #0077ff;
-    box-shadow: 0 0 5px rgba(0,119,255,0.2);
+    outline: none;                        /* remove contorno padrão do navegador */
+    border-color: #0077ff;                /* muda a cor da borda */
+    box-shadow: 0 0 5px rgba(0,119,255,0.2); /* sombra azul leve */
 }
 
-
+/* Efeito para input único fora do inputBox (ex: senha) */
 .inputSingle:focus {
     outline: none;
     border-color: #0077ff;
     box-shadow: 0 0 5px rgba(0,119,255,0.2);
 }
 
+/* Botão padrão */
 .btn {
     padding: 12px;
-    background-color: #0077ff;
-    color: #fff;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
+    background-color: #0077ff;           /* fundo azul */
+    color: #fff;                          /* texto branco */
+    font-weight: bold;                     /* texto em negrito */
+    border: none;                          /* sem borda */
+    border-radius: 8px;                    /* cantos arredondados */
+    cursor: pointer;                       /* cursor de clique */
+    transition: 0.3s;                      /* transição suave */
 }
 
+/* Hover do botão */
 .btn:hover {
-    background-color: #005ecb;
+    background-color: #005ecb;            /* muda a cor do fundo */
 }
 
+/* Mensagem de erro ou alerta */
 .message {
     text-align: center;
-    margin-top: 15px;
-    color: #ff4d4f;
+    margin-top: 15px;                      /* espaço acima */
+    color: #ff4d4f;                        /* vermelho */
     font-weight: bold;
 }
 
+/* Classe para centralizar conteúdo horizontalmente */
 .centralizar {
     display: flex;
-    justify-content: center; /* centraliza horizontalmente */
+    justify-content: center;               /* centraliza horizontalmente */
 }
 
+/* Links estilizados como botão */
 .linkBTN {
-    display: inline-block;       /* permite padding e centralização via text-align do container */
-    color: #0077ff;
+    display: inline-block;                 /* permite padding e centralização via text-align do container */
+    color: #0077ff;                        /* cor azul */
     font-weight: bold;
-    text-decoration: none;
-    margin: 3rem;
+    text-decoration: none;                 /* remove sublinhado */
+    margin: 3rem;                          /* espaçamento ao redor */
     text-align: center;
 }
 
+/* Hover do link */
 .linkBTN:hover {
-    text-decoration: underline;
+    text-decoration: underline;            /* adiciona sublinhado ao passar o mouse */
 }
 
+/* Container de campo de senha */
 .passwordField {
-    position: relative;
+    position: relative;                     /* necessário para posicionar botão show */
     display: flex;
     align-items: center;
     width: 100%;
 }
 
+/* Botão para mostrar/esconder senha */
 .showBtn {
-    position: absolute;
-    right: 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
+    position: absolute;                     /* posicionado dentro do passwordField */
+    right: 10px;                            /* distância da borda direita */
+    background: none;                        /* sem fundo */
+    border: none;                            /* sem borda */
+    cursor: pointer;                         /* cursor de clique */
+    font-size: 18px;                         /* tamanho do ícone/texto */
 }

@@ -1,5 +1,4 @@
-// src/Pages/Perfil/Perfil.jsx
-
+// Importa ferramentas e componentes necessários
 import { useState, useEffect } from "react";
 import style from "./Perfil.module.css";
 import Header from "../../Components/Header";
@@ -9,11 +8,19 @@ import { API_URL } from "../../Context/Config";
 import { useAuth } from "../../Context/AuthContext";
 
 function Perfil() {
-    const { user, logout, login } = useAuth(); // 👉 agora usa o contexto
+    // Pega usuário, logout e login do contexto global de autenticação
+    const { user, logout, login } = useAuth();
+
+    // Controla se está no modo edição
     const [editMode, setEditMode] = useState(false);
+
+    // Armazena os campos do formulário quando estiver editando o usuário
     const [formData, setFormData] = useState({});
+
+    // Tela de carregamento enquanto dados são carregados
     const [loading, setLoading] = useState(true);
 
+    // Quando o usuário existir, preenche o formData com ele
     useEffect(() => {
         if (user) {
             setFormData(user);
@@ -21,10 +28,12 @@ function Perfil() {
         setLoading(false);
     }, [user]);
 
+    // Atualiza o objeto formData conforme o usuário digita
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    // Salva os dados modificados do usuário no backend
     const handleSave = async () => {
         try {
             const response = await axios.put(
@@ -35,9 +44,10 @@ function Perfil() {
                 }
             );
 
-            // 🔥 Agora atualiza o contexto, não só o localStorage
+            // Atualiza o usuário globalmente no contexto de autenticação
             login(response.data);
 
+            // Fecha modo edição
             setEditMode(false);
 
         } catch (err) {
@@ -46,6 +56,7 @@ function Perfil() {
         }
     };
 
+    // Exibe uma tela de carregamento enquanto busca dados
     if (loading) {
         return (
             <div className={style.body}>
@@ -58,6 +69,7 @@ function Perfil() {
         );
     }
 
+    // Caso nenhum usuário esteja logado, exibe aviso
     if (!user) {
         return (
             <div className={style.body}>
@@ -76,6 +88,7 @@ function Perfil() {
 
             <main className={style.container}>
                 <section className={style.profile_card}>
+                    {/* Foto de perfil fake só pra ilustrar */}
                     <div className={style.profile_image}>
                         <img
                             src="https://i.pravatar.cc/150"
@@ -84,6 +97,7 @@ function Perfil() {
                     </div>
 
                     <div className={style.profile_info}>
+                        {/* Se NÃO estiver editando, só exibe as informações */}
                         {!editMode ? (
                             <>
                                 <h2>{user?.nome || "Usuário"}</h2>
@@ -91,6 +105,7 @@ function Perfil() {
                                 <p><strong>Bairro:</strong> {user?.bairro || "—"}</p>
                                 <p><strong>Cidade:</strong> {user?.cidade || "—"}</p>
 
+                                {/* Botão que habilita modo edição */}
                                 <button
                                     className={style.edit_button}
                                     onClick={() => setEditMode(true)}
@@ -99,6 +114,7 @@ function Perfil() {
                                 </button>
                             </>
                         ) : (
+                            // Se estiver em modo edição, exibe inputs para alteração
                             <>
                                 <input
                                     type="text"
@@ -129,6 +145,7 @@ function Perfil() {
                                     className={style.input_field}
                                 />
 
+                                {/* Botões de salvar ou cancelar */}
                                 <div className={style.edit_buttons}>
                                     <button
                                         className={style.save_button}
@@ -140,7 +157,7 @@ function Perfil() {
                                         className={style.cancel_button}
                                         onClick={() => {
                                             setEditMode(false);
-                                            setFormData(user);
+                                            setFormData(user); // Restaura valores originais
                                         }}
                                     >
                                         Cancelar

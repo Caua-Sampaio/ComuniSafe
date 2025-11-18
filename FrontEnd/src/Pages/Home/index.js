@@ -1,42 +1,41 @@
-// import { useState } from 'react'
-// import reactLogo from '../../assets/react.svg'
-// import viteLogo from '../../../public/vite.svg'
-import { Link } from 'react-router-dom';
-import Footer from '../../Components/Footer'
-import Header from '../../Components/Header'
-import style from './Home.module.css';
+
+import { Link } from 'react-router-dom'; // usado para navegar entre rotas sem recarregar a página
+import Footer from '../../Components/Footer' // componente de rodapé
+import Header from '../../Components/Header' // componente de cabeçalho
+import style from './Home.module.css'; // arquivo de estilos específicos da página Home
 
 function Home() {
-// const [count, setCount] = useState(0)
+
 
 return (
-    <div class="body">
+    <div class="body"> {/* contêiner principal da página */}
         
-        <Header/>
+        <Header/> {/* exibe o cabeçalho fixo do site */}
 
         <main>
-            <section class="sobre">
+            <section class="sobre"> {/* seção de conteúdo principal da Home */}
 
-                <h1 class="title">Bem-vindo ao ComuniSafe</h1>
+                <h1 class="title">Bem-vindo ao ComuniSafe</h1> {/* título de apresentação */}
 
+                {/* bloco com texto explicando a proposta da plataforma */}
                 <div className={style.content}>
-                    <p>Feito para ajudar pessoas a se comunicarem em situações de emergência, o ComuniSafe é uma plataforma que oferece recursos essenciais para garantir a segurança e o bem-estar de seus usuários em sua comunidade.</p>
+                    <p>
+                        Feito para ajudar pessoas a se comunicarem em situações de emergência,
+                        o ComuniSafe é uma plataforma que oferece recursos essenciais para garantir
+                        a segurança e o bem-estar de seus usuários em sua comunidade.
+                    </p>
                 </div>
                 
+                {/* área que contém o botão para acessar as publicações */}
                 <div className={style.botao}>
-                    
                     <Link to="/publicacoes" class="btn">Ver Publicações</Link>
-
+                    {/* Link do React Router que leva o usuário para a página de publicações */}
                 </div>
-                
-
-                    
 
             </section>
         </main>
 
-        <Footer/>
-
+        <Footer/> {/* exibe o rodapé */}
     </div>
 )
 }
